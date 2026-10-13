@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="lola 的晚间哑铃训练手册：周一至周四，动作教学、打卡与身体反馈，记录保存在本机。">
+  <title>晚间半小时 · lola 的训练手册</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="plan.js"></script>
+  <script defer src="library.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workout">跳到训练计划</a>
+  <header class="masthead"><a class="wordmark" href="./index.html">晚间半小时<span>lola 的训练手册</span></a><button class="quiet" id="guide-button">使用说明 ↗</button></header>
+  <main>
+    <section class="intro" aria-labelledby="page-title"><div><p class="eyebrow">周一至周四 · 哑铃 / 瑜伽垫</p><h1 id="page-title">留半小时，<br>慢慢变有力。</h1><p class="intro-copy">21:00 开始，21:30 收工。先学动作，再练肌肉；<br class="desktop-break">记录身体的感受，找到能持续的节奏。</p></div><div class="routine"><p class="eyebrow">你的晚间节奏</p><div><b>20:00</b><span>晚饭结束</span></div><div><b>20:00–20:30</b><span>舒适散步</span></div><div class="active"><b>21:00–21:30</b><span>抗阻训练</span></div><div><b>23:00 后</b><span>睡觉</span></div></div></section>
+    <section class="week-section" aria-label="一周安排"><div class="week-heading"><div><h2>这一周</h2><p id="week-range"></p></div><div class="week-controls"><button class="icon-button" id="previous-week" aria-label="上一周">←</button><button class="quiet" id="today-button">回到今天</button><button class="icon-button" id="next-week" aria-label="下一周">→</button></div></div><div id="week-days" class="week-days"></div><p class="week-summary" id="week-summary"></p></section>
+    <div class="workspace">
+      <section id="workout" class="workout" aria-labelledby="workout-title"><div class="workout-header"><div><p class="eyebrow" id="selected-label"></p><h2 id="workout-title"></h2><p id="workout-description"></p></div><label class="date-label">记录日期<input id="record-date" type="date" min="2000-01-01" max="2100-12-31"></label></div>
+        <div id="rest-message" class="rest-message" hidden><span class="rest-symbol" aria-hidden="true">☾</span><h3>今天留给生活。</h3><p>周五到周日不安排正式训练。出去玩、散步都很好；不用补课，也不用填满每一天。</p></div>
+        <div id="training-area"><div class="session-bar"><div><b id="session-time">30:00</b><span id="session-caption">5 分钟热身 · 20 分钟训练 · 5 分钟放松</span></div><button id="session-button" class="primary">开始计时</button></div><details class="warmup"><summary>热身与放松怎么做？</summary><p>热身 5 分钟：肩部绕环、空手推举、徒手浅蹲、空手髋部后移，缓慢完成，不跑跳。先空手试一下今天的动作。</p><p>最后 5 分钟：轻柔活动胸肩、髋腿等当天训练部位，慢慢恢复呼吸。不用力压拉，不加冲刺。</p></details><div class="list-caption"><span id="exercise-progress">按顺序完成，组间休息 60–90 秒</span><span>辅助动作可省略</span></div><div id="exercise-list"></div><div class="rest-timer"><span>组间休息 <b id="rest-countdown">—</b></span><div><button class="quiet" data-rest="60">60 秒</button><button class="quiet" data-rest="90">90 秒</button><button class="quiet" id="stop-rest" disabled>停止</button></div></div><p class="training-note">前两周每组保留 3–4 次余力，不憋气、不练到抬不动。新手第一周可把每个动作的目标改为 1 组。计时仅作提醒，不自动打卡。</p></div>
+      </section>
+      <aside class="feedback" aria-labelledby="feedback-title"><p class="eyebrow">练完，听听身体</p><h2 id="feedback-title">今天感觉怎么样？</h2><p class="feedback-intro">不追求每次都完美。部分完成、休息，也是有用的记录。</p><form id="feedback-form">
+        <label>当天状态<select id="status"><option value="planned">尚未训练</option><option value="completed">完成训练</option><option value="partial">部分完成</option><option value="rest">休息 / 跳过</option></select></label>
+        <label>训练难度<select id="effort"><option value="">未填写</option><option value="easy">轻松，还有很多余力</option><option value="moderate">适中，还能做 3–4 次</option><option value="hard">偏难，接近极限</option></select></label>
+        <label>胃部感受<select id="stomach"><option value="">未填写</option><option value="fine">舒服，没有不适</option><option value="full">饱胀</option><option value="reflux">反酸</option><option value="nausea">恶心 / 腹痛</option></select></label>
+        <label>疼痛或不适<select id="pain"><option value="">未填写</option><option value="none">没有</option><option value="soreness">肌肉酸胀</option><option value="joint">关节刺痛</option><option value="back">腰部疼痛</option><option value="other">其他不适</option></select></label>
+        <label>给自己的备注<textarea id="notes" maxlength="2000" placeholder="例如：深蹲第二组有点累，肩推换成了轻哑铃。"></textarea></label>
+        <fieldset class="sleep-fields"><legend>这一晚的睡眠 · 第二天补记</legend><label>睡眠感受<select id="sleep"><option value="">待补记</option><option value="usual">和平时差不多</option><option value="better">比平时更好</option><option value="worse">比平时更差</option></select></label><label>入睡大约用了几分钟<input type="number" id="sleep-minutes" min="0" max="600" step="1" inputmode="numeric" placeholder="例如 20"></label></fieldset>
+        <p id="feedback-advice" class="feedback-advice" hidden></p><button class="primary save-button" type="submit">保存今日记录</button><p class="save-state" id="save-state" role="status">记录只保存在当前浏览器。</p>
+      </form></aside>
+    </div>
+    <section class="history-section" id="history" aria-labelledby="history-title"><div class="history-heading"><div><p class="eyebrow">一点点积累</p><h2 id="history-title">训练与反馈记录</h2></div><div class="backup-actions"><button class="quiet" id="export-button">导出备份 ↓</button><button class="quiet" id="import-button">导入备份 ↑</button><input id="import-file" type="file" accept="application/json,.json" hidden></div></div><p class="history-note">点开日期可修改记录、补记睡眠。换浏览器不会自动同步；建议每周导出一次备份。</p><div id="history-list"></div></section>
+    <details class="boundaries"><summary>饭后训练、恢复与资料来源</summary><p>20:00 吃完饭，21:00 开始是针对你的时间窗口的起步安排；晚饭不过饱，负荷适中。仍明显饱胀、反酸或恶心时，停止负重训练。关节刺痛或腰痛也不要硬练。持续或严重不适需要专业评估。</p><p>完成训练后不饿就不必固定加餐。如果训练后更难入睡，先减少组数或重量。腿和臀会相互参与；周四如果仍明显酸痛，省略硬拉和深蹲。</p><p>这是一份健康成年新手的起步计划，不是伤病康复处方。原创线条图只说明大致姿势和运动方向，不能检查你的实际动作。哑铃先从轻重量开始。</p><p>动作文字资料参考 <a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" rel="noopener noreferrer">exercises-dataset</a>（MIT）；此版本保留动作中文教学与原创姿势示意，不包含 Gym visual 图片或 GIF。训练记录仅保存在当前浏览器，不上传到 GitHub，也不自动跨设备同步。</p><p><a href="https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/exercise/art-20045506" target="_blank" rel="noopener noreferrer">饭后运动与饮食建议</a> · <a href="https://www.mayoclinic.org/healthy-lifestyle/fitness/basics/strength-training/hlv-20049447" target="_blank" rel="noopener noreferrer">抗阻训练与恢复建议</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/30374942/" target="_blank" rel="noopener noreferrer">晚间运动与睡眠研究</a></p></details>
+  </main>
+  <footer><span>晚间半小时 · 为 lola 留下的练习时间</span><span>本地保存 · 无账号 · 无自动上传</span></footer>
+  <dialog id="teaching-dialog" aria-labelledby="teaching-title"><div class="dialog-top"><span class="eyebrow">动作学习</span><button class="icon-button" id="close-teaching" aria-label="关闭动作教学">×</button></div><div id="teaching-content"></div></dialog>
+  <dialog id="guide-dialog" aria-labelledby="guide-title"><div class="dialog-top"><h2 id="guide-title">从这里开始</h2><button class="icon-button" id="close-guide" aria-label="关闭使用说明">×</button></div><ol class="guide-steps"><li>选择日期，点“学动作”查看姿势示意和分步说明；先空手练习。</li><li>按实际情况调整目标组数，记录哑铃重量、每组次数，做完一组勾一组。</li><li>训练结束选择“完成 / 部分完成 / 休息”，填写反馈后保存。动作数据会自动保存。</li><li>第二天到历史记录中点开昨天，补记昨晚睡眠。</li><li>每周导出备份。导入只补充缺失日期，已有同日记录不会被覆盖。</li></ol><p>固定周一至周四训练，周五至周日休息。练得轻、动作稳，比赶完所有动作更重要。</p><p>文件位置或浏览器变化可能影响本地记录，请先备份再移动网页。请勿用无痕模式长期记录。</p></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <noscript>这个手册需要启用 JavaScript 才能显示训练动作与保存记录。</noscript>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Browser records and local QA are never repository content.
+qa/
+backup/
+backups/
+fitness-backup-*.json
+fitness-original-*.json
+.env
+.env.*
+.DS_Store
+node_modules/
