@@ -3,6 +3,9 @@
   const KEY = 'lola-evening-fitness-v1';
   const PLAN = window.FITNESS_PLAN;
   const EX = window.FITNESS_EXERCISES;
+  const planFor = (date, record=records[date]) => (record && record.planVersion!==2 ? window.FITNESS_LEGACY_PLAN : PLAN)[dow(date)];
+  const viewExercise = (id) => draft.planVersion===2 ? EX[id] : window.FITNESS_LEGACY_EXERCISES[id];
+  const modeExercise = (id,variant='body') => ({...EX[id],...(EX[id].variants?.[variant]||{})});
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const today = () => new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -31,17 +34,25 @@
       for(const [k,values] of Object.entries(enums)) if(!values.includes(r[k])) throw Error('备份中的反馈字段无效。');
       if(!string(r.notes,2000)||!numeric(r.sleepMinutes,600)||(r.sleepMinutes!==null&&!Number.isInteger(r.sleepMinutes))||!string(r.updatedAt,40)||Number.isNaN(Date.parse(r.updatedAt))) throw Error('备份中的备注、睡眠时间或保存时间无效。');
       if(!r.exercises || typeof r.exercises!=='object'||Array.isArray(r.exercises)) throw Error('备份中的动作记录无效。');
-      const allowed=(PLAN[dow(key)]?.exercises||[]).map(x=>x[0]);
+      if(r.planVersion!==undefined && r.planVersion!==2) throw Error('备份中的计划版本无效。');
+      const allowed=(planFor(key,r)?.exercises||[]).map(x=>x[0]);
       for(const [id,v] of Object.entries(r.exercises)) {
         if(!allowed.includes(id)||!v||!Number.isInteger(v.target)||v.target<1||v.target>3||!numeric(v.weight,200)||!string(v.reps,80)||!Array.isArray(v.done)||v.done.length!==v.target||!v.done.every(x=>typeof x==='boolean')) throw Error('备份中的动作组数或重量无效。');
+        if(v.variant!==undefined && (id!=='bridge'||!['body','dumbbell'].includes(v.variant)||r.planVersion!==2)) throw Error('备份中的动作版本无效。');
       }
     }
     return data.records;
   }
   try {rawStorage=localStorage.getItem(KEY);if(rawStorage) records=validateBackup(JSON.parse(rawStorage));}
   catch(e){storageBlocked=true;}
-  function blank(date) {return {date,status:PLAN[dow(date)]?'planned':'rest',effort:'',stomach:'',pain:'',notes:'',sleep:'',sleepMinutes:null,exercises:{},updatedAt:new Date().toISOString()};}
-  function getExercise(id,target) {return draft.exercises[id] ||= {target,weight:null,reps:'',done:Array(target).fill(false)};}
+  function blank(date) {return {date,planVersion:2,status:PLAN[dow(date)]?'planned':'rest',effort:'',stomach:'',pain:'',notes:'',sleep:'',sleepMinutes:null,exercises:{},updatedAt:new Date().toISOString()};}
+  function getExercise(id,target) {
+    if(draft.exercises[id])return draft.exercises[id];
+    const value={target,weight:['split','calf','abduction','deadbug','birddog','sideplank','bridge'].includes(id)&&draft.planVersion===2?0:null,reps:'',done:Array(target).fill(false),...(id==='bridge'&&draft.planVersion===2?{variant:'body'}:{})};
+    if(draft.planVersion===2)draft.exercises[id]=value;
+    return value;
+  }
+
   function toast(message) {$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastDelay);toastDelay=setTimeout(()=>{$('toast').hidden=true;},6000);}
   function gather() {
     if($('exercise-list').querySelector('[aria-invalid="true"]')) throw Error('请先修正无效的哑铃重量，当前记录未保存。');
@@ -73,7 +84,7 @@
   function renderWeek() {
     $('week-range').textContent=`${weekStart.slice(0,4)} 年 · ${label(weekStart)} — ${label(addDays(weekStart,6))}`;
     $('week-days').innerHTML=Array.from({length:7},(_,i)=>{
-      const date=addDays(weekStart,i), day=dow(date), p=PLAN[day],r=records[date];
+      const date=addDays(weekStart,i), day=dow(date), p=planFor(date),r=records[date];
       return `<button class="day-tab${p?'':' rest-day'}" data-date="${date}" aria-pressed="${selected===date}" aria-label="${esc(date+' '+weekNames[day]+' '+(p?.title||'休息'))}"><span class="day-name">${weekNames[day]}</span><span class="day-title">${p?.title||'休息'}</span><span class="day-date">${date.slice(5).replace('-','.')}</span><span class="day-status">${r?{planned:'未开始',completed:'已完成',partial:'部分',rest:'休息'}[r.status]:date===today()?'今天':'—'}</span></button>`;
     }).join('');
     const scheduled=Array.from({length:4},(_,i)=>records[addDays(weekStart,i)]);
@@ -81,21 +92,23 @@
     $('week-summary').textContent=`计划 4 天 · 完成 ${complete} 天 · 部分完成 ${partial} 天 · 周五至周日放松`;
   }
   function renderExercises() {
-    const list=PLAN[dow(selected)]?.exercises||[];
+    const list=planFor(selected,draft)?.exercises||[];
     $('exercise-list').innerHTML=list.map(([id,sets,reps,optional],index)=>{
-      const ex=EX[id],r=getExercise(id,sets);
-      return `<article class="exercise" data-exercise="${id}"><div class="exercise-head"><div class="exercise-title"><span class="exercise-index">${String(index+1).padStart(2,'0')}</span><h3>${ex.name}</h3></div><button class="quiet teach-button" data-teach="${id}">学动作 ↗</button></div><p class="exercise-meta">${ex.muscle} · ${reps}${optional?' · 辅助，可省略':''}</p><div class="exercise-fields"><label>目标组数<select data-field="target" aria-label="${ex.name}目标组数">${[1,2,3].map(n=>`<option value="${n}"${r.target===n?' selected':''}>${n} 组</option>`).join('')}</select></label><label>哑铃重量 / kg<input data-field="weight" type="number" min="0" max="200" step="any" inputmode="decimal" value="${r.weight??''}" aria-label="${ex.name}哑铃重量" placeholder="徒手填 0"></label><label>实际次数${id==='sideplank'?' / 秒':''}<input data-field="reps" maxlength="80" value="${esc(r.reps)}" aria-label="${ex.name}实际次数" placeholder="例如 10 / 8"></label><div class="sets-field"><span>完成组数</span>${r.done.map((v,i)=>`<label><input type="checkbox" data-field="done" data-set="${i}"${v?' checked':''} aria-label="${ex.name}第${i+1}组完成">${i+1}</label>`).join('')}</div></div><p class="weight-note">${ex.equipment} · 单侧动作做完两侧算一组</p></article>`;
+      const r=getExercise(id,sets),ex=draft.planVersion===2?modeExercise(id,r.variant):viewExercise(id);
+      const body=draft.planVersion===2 && (['split','calf','abduction','deadbug','birddog','sideplank'].includes(id)||(id==='bridge'&&r.variant!=='dumbbell'));
+      const variants=id==='bridge'&&draft.planVersion===2?`<label class="variant-field">练习版本<select data-field="variant" aria-label="臀桥练习版本">${Object.entries(EX.bridge.variants).map(([v,m])=>`<option value="${v}"${r.variant===v?' selected':''}>${m.label}</option>`).join('')}</select></label>`:'';
+      return `<article class="exercise" data-exercise="${id}"><div class="exercise-head"><div class="exercise-title"><span class="exercise-index">${String(index+1).padStart(2,'0')}</span><h3>${ex.name}</h3></div><button class="quiet teach-button" data-teach="${id}">学动作 ↗</button></div><p class="exercise-meta">${ex.muscle} · ${reps}${optional?' · 辅助，可省略':''}</p><div class="exercise-fields">${variants}<label>目标组数<select data-field="target" aria-label="${ex.name}目标组数">${[1,2,3].map(n=>`<option value="${n}"${r.target===n?' selected':''}>${n} 组</option>`).join('')}</select></label><label>哑铃重量 / kg<input data-field="weight" ${body?'data-body="true" disabled':''} type="number" min="0" max="200" step="any" inputmode="decimal" value="${r.weight??''}" aria-label="${ex.name}哑铃重量" placeholder="徒手填 0"></label><label>实际次数${id==='sideplank'?' / 秒':''}<input data-field="reps" maxlength="80" value="${esc(r.reps)}" aria-label="${ex.name}实际次数" placeholder="例如 10 / 8"></label><div class="sets-field"><span>完成组数</span>${r.done.map((v,i)=>`<label><input type="checkbox" data-field="done" data-set="${i}"${v?' checked':''} aria-label="${ex.name}第${i+1}组完成">${i+1}</label>`).join('')}</div></div><p class="weight-note">${ex.equipment} · 单侧动作做完两侧算一组</p></article>`;
     }).join('');
-    const future=selected>today();$('exercise-list').querySelectorAll('input,select').forEach(e=>e.disabled=future);updateProgress();
+    const future=selected>today();$('exercise-list').querySelectorAll('input,select').forEach(e=>e.disabled=future||e.dataset.body==='true');updateProgress();
   }
-  function updateProgress() {const list=PLAN[dow(selected)]?.exercises||[];let done=0,total=0;for(const [id,sets] of list){const r=getExercise(id,sets);total+=r.target;done+=r.done.filter(Boolean).length;}$('exercise-progress').textContent=`已勾选 ${done} / ${total} 组 · 组间休息 60–90 秒`;}
+  function updateProgress() {const list=planFor(selected,draft)?.exercises||[];let done=0,total=0;for(const [id,sets] of list){const r=getExercise(id,sets);total+=r.target;done+=r.done.filter(Boolean).length;}$('exercise-progress').textContent=`已勾选 ${done} / ${total} 组 · 组间休息 60–90 秒`;}
   function renderHistory() {
     const dates=Object.keys(records).sort().reverse();
     if(!dates.length){$('history-list').innerHTML='<div class="empty-state"><h3>第一条记录，等你开始。</h3><p>完成多少就记多少。练完保存，明天回来补记睡眠。</p><button class="quiet" id="start-record">去记录 ↑</button></div>';return;}
     $('history-list').innerHTML=dates.map(date=>{
       const r=records[date];const count=Object.values(r.exercises).reduce((sum,v)=>sum+v.done.filter(Boolean).length,0);
       const sleepText=r.sleep?{usual:'睡眠如常',better:'睡眠更好',worse:'睡眠变差'}[r.sleep]:date<today()&&r.status!=='rest'?'睡眠待补记':'睡眠未填写';
-      return `<div class="history-row"><div><strong>${esc(date)} · ${PLAN[dow(date)]?.title||'休息'} · ${statusLabels[r.status]}</strong><p>${count} 组已勾选 · ${sleepText}${r.notes?' · '+esc(r.notes.slice(0,45))+(r.notes.length>45?'…':''):''}</p></div><button class="quiet" data-history="${date}">${!r.sleep&&date<today()&&r.status!=='rest'?'补记 / 编辑':'查看 / 编辑'}</button></div>`;
+      return `<div class="history-row"><div><strong>${esc(date)} · ${planFor(date,r)?.title||'休息'} · ${statusLabels[r.status]}</strong><p>${count} 组已勾选 · ${sleepText}${r.notes?' · '+esc(r.notes.slice(0,45))+(r.notes.length>45?'…':''):''}</p></div><button class="quiet" data-history="${date}">${!r.sleep&&date<today()&&r.status!=='rest'?'补记 / 编辑':'查看 / 编辑'}</button></div>`;
     }).join('');
   }
   function advice() {
@@ -108,9 +121,9 @@
   }
   function render() {
     draft=structuredClone(records[selected]||blank(selected));dirty=false;
-    const p=PLAN[dow(selected)],future=selected>today();$('record-date').value=selected;
+    const p=planFor(selected,draft),future=selected>today();$('record-date').value=selected;
     $('selected-label').textContent=`${label(selected)} · ${weekNames[dow(selected)]}${selected===today()?' · 今天':''}${future?' · 计划预览':''}`;
-    $('workout-title').textContent=p?`${p.title}训练日`:'休息日';$('workout-description').textContent=p?p.subtitle:'周末没有训练任务，不需要补课。';
+    $('workout-title').textContent=p?`${p.title}训练日`:'休息日';$('workout-description').textContent=p?p.subtitle+(draft.planVersion!==2?' 历史记录：保留原计划、原动作与组数。':''):'周末没有训练任务，不需要补课。';
     $('training-area').hidden=!p;$('rest-message').hidden=!!p;renderWeek();renderExercises();
     for(const k of feedbackKeys)$(k).value=draft[k];$('sleep-minutes').value=draft.sleepMinutes??'';
     $('feedback-form').querySelectorAll('input,select,textarea,button').forEach(e=>e.disabled=future);
@@ -122,29 +135,29 @@
     const poly=points=>`<polyline points="${points.map(v=>v.join(',')).join(' ')}"/>`;
     return `<svg viewBox="0 0 240 160" role="img" aria-label="${esc(caption)}"><path d="M16 150H224" stroke="currentColor" stroke-width="1" opacity=".35" fill="none"/><g stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="${p.head[0]}" cy="${p.head[1]}" r="10"/>${poly(p.spine)}${p.arms.map(poly).join('')}${p.legs.map(poly).join('')}</g>${(p.weights||[]).map(([x,y])=>`<g stroke="currentColor" stroke-width="3"><path d="M${x-10} ${y}h20"/><path d="M${x-10} ${y-5}v10M${x+10} ${y-5}v10"/></g>`).join('')}</svg>`;
   }
-  function teach(id) {
-    const ex=EX[id];if(!ex)return;
+  function teach(id,previewVariant) {
+    if(!EX[id])return;
+    const r=draft.exercises[id],variant=previewVariant||r?.variant||'body',ex=modeExercise(id,variant);
+    const media=ex.media,video=media.endsWith('.mp4');
+    const variants=ex.variants?`<label>查看版本<select id="teaching-variant" data-id="${id}">${Object.entries(ex.variants).map(([key,v])=>`<option value="${key}"${key===variant?' selected':''}>${v.label}</option>`).join('')}</select></label><p>这里切换只用于学习；实际练习版本请在训练卡中选择。</p>`:'';
     const original=window.FITNESS_LIBRARY?.[ex.source];
-    const originalSteps=original?.instruction_steps?.zh || [];
-    const reference = `<div class="teach-block source-block"><h3>${original?(ex.referenceOnly?'原库相近变式 · 不作为本动作示范':'原库本地资料'):'示范说明'}</h3><p class="variant-note">${esc(ex.sourceNote)}</p>${original?`
-      <div class="local-media"><figure><img id="library-image" src="${esc(original.local_image)}" width="180" height="180" alt="${esc(original.name)} 原库示范"><figcaption>© Gym visual — https://gymvisual.com/</figcaption></figure><div class="media-controls"><p class="original-name">${esc(original.name)}</p><button id="media-toggle" class="primary" type="button" aria-pressed="false" aria-controls="library-image" data-image="${esc(original.local_image)}" data-gif="${esc(original.local_gif)}" data-start-label="${ex.referenceOnly?'播放对比动画':'播放动画'}">${ex.referenceOnly?'播放对比动画':'播放动画'}</button><p>图片与动画已保存在本地，无需联网。</p><p id="media-error" role="status" hidden></p></div></div>
-      <details class="library-description"><summary>原库中文介绍</summary>${originalSteps.length?`<ol>${originalSteps.map(step=>`<li>${esc(step)}</li>`).join('')}</ol>`:`<p>${esc(original.instructions?.zh||'原库未提供中文说明。')}</p>`}<p>原库的介绍对应它的示范版本；你的训练方式按下面的分步说明执行。</p></details>`:''}</div>`;
-    $('teaching-content').innerHTML=`<h2 id="teaching-title">${ex.name}</h2><p class="teach-muscle">${ex.muscle} · ${ex.equipment}</p>${reference}<div class="pose-grid">${ex.poses.map((p,i)=>`<figure>${svgPose(p,ex.captions[i])}<figcaption>${i+1}. ${ex.captions[i]}</figcaption></figure>`).join('')}</div><p class="pose-note">本计划的原创姿势示意 · 只说明大致方向，不表达精确角度，也不能评估你的动作。先空手或轻重量。</p><div class="teach-block"><h3>一步一步做</h3><ol>${ex.steps.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div><div class="teach-block"><h3>别这样做</h3><ul>${ex.mistakes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div class="teach-block"><h3>应该有什么感觉？</h3><p>${esc(ex.feel)}</p></div><div class="teach-block"><h3>做不稳，先简化</h3><p>${esc(ex.easier)}</p></div>`;
-    const image=$('library-image');
-    if(image) image.addEventListener('error',()=>{image.hidden=true;$('media-toggle').disabled=true;$('media-error').hidden=false;$('media-error').textContent='本地素材无法加载。请保留网页旁的 assets 文件夹，并重新打开网页。';});
-    $('teaching-dialog').showModal();$('teaching-dialog').scrollTop=0;
+    $('teaching-content').innerHTML=`<h2 id="teaching-title">${esc(ex.label||ex.name)}</h2><p class="teach-muscle">${esc(ex.muscle)} · ${esc(ex.equipment)}</p>${draft.planVersion!==2?'<p class="variant-note">这是新版教学。历史打卡保留原动作和组数；划船、死虫式与新版有所不同，不能把旧记录当作已完成新版。</p>':''}${variants}<div class="teach-block source-block"><h3>示范版本说明 · 本仓库不含媒体</h3><p>${esc(ex.match)}</p><p class="variant-note">仓库版本不包含第三方动画或视频。完整动态示范保留在本地完整版本；本页提供对应版本的说明和出处，不从网络自动读取媒体。</p><p>示范来源：${esc(ex.credit)}</p><p id="media-error" role="status" hidden></p></div><div class="teach-block"><h3>器材、摆位与安全结束</h3><p>${esc(ex.load)}</p></div><div class="teach-block"><h3>一步一步做</h3><ol>${ex.steps.map(x=>`<li>${esc(x)}</li>`).join('')}</ol><p>用力时呼气、回落时吸气；支撑动作正常持续呼吸，不憋气。</p></div><div class="teach-block"><h3>常见错误</h3><ul>${ex.mistakes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p>${esc(ex.feel)}</p><p>降低难度：${esc(ex.easier)}</p></div><div class="teach-block"><h3>说明由谁整理？怎样核对？</h3><p>本页步骤、常见错误与器材提醒由助手依据下列资料改写整理，不是原库逐字引用，也未经专业人士逐条审核。核对日期：2026-10-14。来源资料与文字可用于学习，不能评估你本人的姿势。</p><ul>${ex.sources.map(([name,url])=>`<li><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(name)}</a></li>`).join('')}</ul>${original&&!['row','shoulder','abduction','deadbug'].includes(id)?`<details><summary>原库中文原文（与整理说明区分）</summary><ol>${(original.instruction_steps?.zh||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ol></details>`:''}<p>本仓库不含第三方媒体；来源标注不代表取得公开再分发权。</p></div>`;
+    $('teaching-content').querySelector('video,img')?.addEventListener('error',()=>{$('media-error').hidden=false;$('media-error').textContent='本地示范加载失败，请保留 assets 文件夹。';});
+    if(!$('teaching-dialog').open)$('teaching-dialog').showModal();$('teaching-dialog').scrollTop=0;
   }
+  $('teaching-content').addEventListener('change',e=>{if(e.target.id==='teaching-variant')teach(e.target.dataset.id,e.target.value);});
   $('teaching-content').addEventListener('click',e=>{
     const button=e.target.closest('#media-toggle');if(!button)return;
     const playing=button.getAttribute('aria-pressed')==='true';
     $('library-image').src=playing?button.dataset.image:button.dataset.gif;
     button.setAttribute('aria-pressed',String(!playing));button.textContent=playing?button.dataset.startLabel:'停止动画';
   });
+  $('teaching-dialog').addEventListener('close',()=>{$('teaching-content').querySelector('video')?.pause();const b=$('media-toggle');if(b&&$('library-image'))$('library-image').src=b.dataset.image;});
   function updateTimers() {
     if(sessionDeadline!==null){sessionRemaining=Math.max(0,Math.ceil((sessionDeadline-Date.now())/1000));if(!sessionRemaining){sessionDeadline=null;toast('30 分钟到了，结束训练并放松。记录需你自己保存。');}}
     $('session-time').textContent=`${String(Math.floor(sessionRemaining/60)).padStart(2,'0')}:${String(sessionRemaining%60).padStart(2,'0')}`;
     $('session-button').textContent=sessionDeadline?'暂停':sessionRemaining===1800?'开始计时':sessionRemaining===0?'重新计时':'继续计时';
-    if(sessionDeadline){const elapsed=1800-sessionRemaining;$('session-caption').textContent=elapsed<300?'热身阶段 · 缓慢活动关节':elapsed<1500?'正式训练 · 不赶进度，组间休息':'放松阶段 · 恢复呼吸，准备收工';}else $('session-caption').textContent=sessionRemaining===1800?'5 分钟热身 · 20 分钟训练 · 5 分钟放松':sessionRemaining===0?'训练结束 · 计时不会自动打卡':'计时已暂停';
+    if(sessionDeadline){const elapsed=1800-sessionRemaining;$('session-caption').textContent=elapsed<300?'热身阶段 · 缓慢活动关节':elapsed<1620?'正式训练 · 不赶进度，组间休息':'放松阶段 · 恢复呼吸，准备收工';}else $('session-caption').textContent=sessionRemaining===1800?'5 分钟热身 · 22 分钟训练 · 3 分钟放松':sessionRemaining===0?'训练结束 · 计时不会自动打卡':'计时已暂停';
     if(restDeadline!==null){const n=Math.max(0,Math.ceil((restDeadline-Date.now())/1000));$('rest-countdown').textContent=`${n} 秒`;if(!n){restDeadline=null;toast('休息时间到了，感觉准备好再开始下一组。');}}
     else $('rest-countdown').textContent='—';$('stop-rest').disabled=restDeadline===null;
   }
@@ -154,12 +167,14 @@
   $('exercise-list').addEventListener('click',e=>{const b=e.target.closest('[data-teach]');if(b)teach(b.dataset.teach);});
   $('exercise-list').addEventListener('input',e=>{
     const field=e.target.dataset.field,box=e.target.closest('[data-exercise]');if(!field||!box)return;
-    const r=draft.exercises[box.dataset.exercise];
+    const id=box.dataset.exercise;const target=planFor(selected,draft).exercises.find(x=>x[0]===id)[1];
+    const r=draft.exercises[id] ||= getExercise(id,target);
     if(field==='weight'){
       const n=e.target.value===''?null:Number(e.target.value);if(!numeric(n,200)){e.target.setAttribute('aria-invalid','true');$('save-state').textContent='重量需填写 0–200 kg，当前输入未保存。';return;}e.target.removeAttribute('aria-invalid');r.weight=n;
     }else if(field==='reps')r.reps=e.target.value;
     else if(field==='done')r.done[Number(e.target.dataset.set)]=e.target.checked;
-    else if(field==='target'){const target=Number(e.target.value);r.done=Array.from({length:target},(_,i)=>r.done[i]||false);r.target=target;renderExercises();}
+    else if(field==='variant'){if(r.done.some(Boolean)||r.reps||r.weight>0){e.target.value=r.variant;toast('本动作已有记录，不能直接切换版本。可在教学里查看另一版；更正实际记录时先取消勾选并清空次数、重量。');return;}r.variant=e.target.value;r.weight=0;renderExercises();}
+    else if(field==='target'){const target=Number(e.target.value);if(target<r.target&&r.done.slice(target).some(Boolean)){e.target.value=String(r.target);toast('已有完成勾选，请先取消多出的组，再减少目标。');return;}r.done=Array.from({length:target},(_,i)=>r.done[i]||false);r.target=target;renderExercises();}
     updateProgress();changed();
   });
   $('feedback-form').addEventListener('input',()=>{advice();changed();});

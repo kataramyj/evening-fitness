@@ -5,6 +5,13 @@ window.FITNESS_PLAN = {
   3: { title: '核心', subtitle: '控制身体，顺便再练一点胸背。', exercises: [['deadbug',2,'每侧 6–8 次'],['birddog',2,'每侧 6 次'],['sideplank',1,'每侧 15–20 秒'],['press',1,'8–12 次',true],['row',1,'每侧 8–12 次',true]] },
   4: { title: '臀', subtitle: '从髋部发力，不用腰部硬顶。', exercises: [['bridge',2,'10–15 次'],['rdl',2,'8–10 次'],['abduction',2,'每侧 10–12 次'],['squat',1,'8–10 次',true]] }
 };
+window.FITNESS_LEGACY_PLAN = window.FITNESS_PLAN;
+window.FITNESS_PLAN = {
+  1: {title:'胸背',subtitle:'胸背主练，肩和手臂辅助；共 10 组。',exercises:[['press',3,'8–12 次'],['row',3,'8–12 次'],['shoulder',2,'8–10 次'],['curl',2,'每侧 10–12 次']]},
+  2: {title:'腿',subtitle:'大腿与小腿；共 9 组，分腿蹲两侧算一组。',exercises:[['squat',3,'8–12 次'],['split',3,'每侧 6–8 次'],['calf',3,'12–15 次']]},
+  3: {title:'核心',subtitle:'稳定练习，加胸背第二次刺激；共 10 组。',exercises:[['deadbug',2,'每侧 6–8 次'],['birddog',2,'每侧 6 次'],['sideplank',2,'每侧 15–20 秒'],['press',2,'8–12 次'],['row',2,'8–12 次']]},
+  4: {title:'臀',subtitle:'臀与腿后侧；共 10 组，最后两组深蹲用轻重量。',exercises:[['bridge',3,'10–15 次'],['rdl',3,'8–10 次'],['abduction',2,'每侧 10–12 次'],['squat',2,'8–10 次']]}
+};
 // Original schematic coordinates, authored independently of third-party media.
 // Each pose: head, spine, two arms, two legs, optional dumbbell locations.
 const standing = {head:[120,24],spine:[[120,40],[120,90]],arms:[[[120,45],[100,67],[98,88]],[[120,45],[140,67],[142,88]]],legs:[[[120,90],[102,115],[96,145]],[[120,90],[138,115],[144,145]]]};
