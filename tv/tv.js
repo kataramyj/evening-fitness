@@ -4,7 +4,7 @@
   var PLAN=window.FITNESS_PLAN, EX=window.FITNESS_COACHING;
   var $=function(id){return document.getElementById(id);};
   var escapeHTML=function(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
-  var state={day:1,index:0,screen:'home',variants:{bridge:'dumbbell'},done:{},playing:false,loading:false,mediaFailed:false,remaining:1800,deadline:null,restDeadline:null,restOpen:false,follow:null,routine:null};
+  var state={day:1,index:0,screen:'home',variants:{bridge:'dumbbell'},done:{},remaining:1800,deadline:null,restDeadline:null,restOpen:false,follow:null,routine:null};
   var noticeTimeout,mediaToken=0,returnFocus='tv-rest';
   var names=['周日','周一','周二','周三','周四','周五','周六'];
   function focus(id){var el=$(id);if(el&&!el.disabled&&!el.hidden){try{el.focus({preventScroll:true});}catch(e){el.focus();}}}
@@ -28,47 +28,36 @@
     $('tv-complete').disabled=completed()>=item[1];$('tv-complete').textContent=completed()>=item[1]?'本动作已做完':'本组完成';
   }
   function status(text,error){$('tv-media-status').textContent=text;$('tv-media-status').setAttribute('data-error',error?'true':'false');}
-  function updatePlay(){
-    $('tv-play').textContent=state.mediaFailed?'重试示范':state.loading?'正在载入…':state.playing?'暂停示范':'播放示范';
-    $('tv-play').setAttribute('aria-pressed',state.playing?'true':'false');$('tv-play').setAttribute('aria-busy',state.loading?'true':'false');
-  }
   function pauseMedia(){
     var v=$('tv-video'),image=$('tv-image');if(v)v.pause();
     if(image&&image.dataset.poster)image.src=image.dataset.poster;
-    state.playing=false;state.loading=false;updatePlay();
   }
   function failed(token){
-    if(token!==mediaToken)return;state.mediaFailed=true;state.playing=false;state.loading=false;updatePlay();
-    status('示范无法加载或格式不支持。请保留完整 assets 文件夹，用浏览器打开；可选“重试示范”。',true);
+    if(token!==mediaToken)return;
+    status('示范无法加载或格式不支持；仍可按右侧文字步骤练习。',true);
     var media=$('tv-media').querySelector('video,img');if(media)media.hidden=true;
+  }
+  function resumeMedia(){
+    var video=$('tv-video'),image=$('tv-image'),token=mediaToken;
+    if(video){
+      try{var pending=video.play();if(pending&&pending.catch)pending.catch(function(){if(token!==mediaToken)return;video.controls=true;status('浏览器未允许自动播放，可尝试视频自带的播放控制；文字步骤仍可使用。',true);});}
+      catch(e){video.controls=true;status('浏览器未允许自动播放；文字步骤仍可使用。',true);}
+    }else if(image&&image.dataset.gif&&image.src!==new URL(image.dataset.gif,document.baseURI).href)image.src=image.dataset.gif;
   }
   function loadMedia(){
     pauseMedia();var token=++mediaToken,ex=exercise(),src=ex.media;
-    state.mediaFailed=false;state.loading=false;$('tv-media').innerHTML='';
+    $('tv-media').innerHTML='';
     $('tv-media-credit').textContent=ex.credit;$('tv-media-quality').textContent=/\.svg$/.test(src)?'原创静态示意；以文字步骤为准':src.indexOf('assets/videos/')===0||src.indexOf('bent-over-row.gif')>=0?'原库小尺寸动画，放大后较模糊':'';
-    status('按“播放示范”开始；暂停只停止示范，不停止训练计时。');
+    status('');
     var media;
     if(/\.mp4$/.test(src)){
-      media=document.createElement('video');media.id='tv-video';media.muted=true;media.loop=true;media.preload='metadata';media.setAttribute('playsinline','');media.setAttribute('muted','');media.setAttribute('aria-label',ex.name+'动态示范');media.src=src;
-      media.addEventListener('loadeddata',function(){if(token===mediaToken&&state.loading){state.loading=false;updatePlay();}});
-      media.addEventListener('playing',function(){if(token===mediaToken){state.loading=false;state.playing=true;updatePlay();status('示范循环播放中 · 保持自己的节奏，不追动画速度。');}});
-      media.addEventListener('pause',function(){if(token===mediaToken){state.playing=false;state.loading=false;updatePlay();}});
+      media=document.createElement('video');media.id='tv-video';media.muted=true;media.loop=true;media.preload='auto';media.setAttribute('playsinline','');media.setAttribute('muted','');media.setAttribute('aria-label',ex.name+'动态示范');media.src=src;
+      media.addEventListener('playing',function(){if(token===mediaToken){media.controls=false;status('');}});
     }else{
-      media=document.createElement('img');media.id='tv-image';media.alt=ex.name+'本地动态示范';media.dataset.poster=/\.svg$/.test(src)?src:src.replace('.gif','-poster.jpg');media.dataset.gif=src;media.src=media.dataset.poster;
+      media=document.createElement('img');media.id='tv-image';media.alt=ex.name+'本地动态示范';media.dataset.poster=/\.svg$/.test(src)?src:src.replace('.gif','-poster.jpg');media.dataset.gif=src;media.src=src;
       if(src.indexOf('assets/videos/')===0||src.indexOf('bent-over-row.gif')>=0)media.className='tv-low-resolution';
-      media.addEventListener('load',function(){if(token===mediaToken&&state.loading){state.loading=false;updatePlay();}});
     }
-    media.addEventListener('error',function(){failed(token);});$('tv-media').appendChild(media);updatePlay();
-  }
-  function togglePlay(){
-    if(state.mediaFailed){loadMedia();return;}
-    if(state.loading){pauseMedia();status('已暂停载入；再次确认可播放。');return;}
-    if(state.playing){pauseMedia();status('示范已暂停。');return;}
-    var video=$('tv-video'),image=$('tv-image'),token=mediaToken;
-    if(video){
-      state.loading=true;updatePlay();status('正在载入本地视频…');
-      try{var pending=video.play();if(pending&&pending.catch)pending.catch(function(){if(token!==mediaToken||!state.loading)return;state.loading=false;state.playing=false;updatePlay();status('浏览器未能播放。可再次确认重试；若仍失败，请换支持 MP4 的浏览器。',true);});}catch(e){failed(token);}
-    }else if(image){image.src=image.dataset.gif;state.playing=true;state.loading=true;updatePlay();status('示范循环播放中 · 保持自己的节奏，不追动画速度。');}
+    media.addEventListener('error',function(){failed(token);});$('tv-media').appendChild(media);if(media.tagName==='VIDEO'&&!$('tv-lesson').classList.contains('tv-routine-open'))resumeMedia();
   }
   function renderLesson(){
     var item=current(),ex=exercise(),list=PLAN[state.day].exercises;
@@ -76,7 +65,7 @@
     $('tv-action-name').textContent=ex.label||ex.name;updateProgress();
     $('tv-previous').disabled=state.index===0;$('tv-next').disabled=state.index===list.length-1;
     
-    renderGuide(ex);loadMedia();renderFollow();updateTimers();
+    renderGuide(ex);loadMedia();if($('tv-lesson').classList.contains('tv-routine-open'))pauseMedia();renderFollow();updateTimers();
   }
   function renderRoutine(type){
     state.routine=type;var r=window.TV_ROUTINES,items=type==='warmup'?r.days[state.day].warmup:r.days[state.day].cooldown.concat(r.commonCooldown);
@@ -87,7 +76,7 @@
       return '<article class="tv-routine-card">'+visual+'<strong>'+escapeHTML(item[0])+'</strong><p>'+escapeHTML(item[1])+'</p><span>'+escapeHTML(item[2])+'</span>'+(media?'<small>'+escapeHTML(media.credit)+'</small>':'')+'</article>';
     }).join('');
     $('tv-routine-content').querySelectorAll('img,video').forEach(function(media){media.addEventListener('error',function(){var note=document.createElement('p');note.className='tv-routine-error';note.textContent='示范未能加载，请按文字步骤进行。';media.replaceWith(note);});});
-    $('tv-routine-content').hidden=false;$('tv-lesson').classList.add('tv-routine-open');$('tv-warmup').setAttribute('aria-pressed',type==='warmup'?'true':'false');$('tv-cooldown').setAttribute('aria-pressed',type==='cooldown'?'true':'false');
+    $('tv-routine-content').hidden=false;$('tv-lesson').classList.add('tv-routine-open');pauseMedia();$('tv-warmup').setAttribute('aria-pressed',type==='warmup'?'true':'false');$('tv-cooldown').setAttribute('aria-pressed',type==='cooldown'?'true':'false');
   }
   function followTarget(){var id=current()[0];return id==='sideplank'?1:/^(deadbug|birddog)$/.test(id)?30:15;}
   function followSides(){return /^(split|abduction|sideplank)$/.test(current()[0])?2:1;}
@@ -120,7 +109,7 @@
   function toggleFollow(){
     var f=state.follow;if(f){if(f.paused){f.deadline=Date.now()+f.left;f.paused=false;}else pauseFollow();renderFollow();return;}
     if(completed()>=current()[1]){notice('这个动作的组数已完成，请选择下一动作。');return;}
-    state.follow={mode:'work',rep:0,side:1,paused:false};$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');
+    state.follow={mode:'work',rep:0,side:1,paused:false};$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();
     followStage('work',followSeconds());
   }
   function finishFollowSet(){
@@ -147,7 +136,7 @@
   function selectDay(day){
     stopFollow();pauseMedia();if(state.day!==day){state.index=0;state.remaining=1800;}state.day=day;state.screen='lesson';state.deadline=null;state.restDeadline=null;
     $('tv-home').hidden=true;$('tv-lesson').hidden=false;$('tv-home-button').hidden=false;$('tv-brand').hidden=true;$('tv-header-lesson').hidden=false;document.querySelector('.tv-header').classList.add('tv-header-lesson-open');
-    renderLesson();renderRoutine('warmup');focus('tv-warmup');status('先按今日热身卡准备，再开始正式训练。');
+    renderRoutine('warmup');renderLesson();focus('tv-warmup');
   }
   function home(){
     stopFollow();pauseMedia();pauseSession();closeRest();state.screen='home';$('tv-lesson').hidden=true;$('tv-home').hidden=false;$('tv-home-button').hidden=true;$('tv-brand').hidden=false;$('tv-header-lesson').hidden=true;document.querySelector('.tv-header').classList.remove('tv-header-lesson-open');
@@ -157,7 +146,7 @@
     var next=state.index+step;if(next<0||next>=PLAN[state.day].exercises.length)return;
     stopFollow();pauseMedia();state.index=next;renderLesson();
     // Keep navigation focus unless the endpoint disabled the button just used.
-    var active=document.activeElement;if(!active||active.disabled||!active.getClientRects().length)focus('tv-play');
+    var active=document.activeElement;if(!active||active.disabled||!active.getClientRects().length)focus('tv-follow-toggle');
   }
   function pauseSession(){if(state.deadline!==null){state.remaining=Math.max(0,Math.ceil((state.deadline-Date.now())/1000));state.deadline=null;updateTimers();}}
   function toggleSession(){
@@ -176,7 +165,8 @@
     if(!state.restOpen)return;state.restOpen=false;state.restDeadline=null;$('tv-rest-panel').hidden=true;$('tv-main').removeAttribute('aria-hidden');
     document.querySelectorAll('[data-previous-tab]').forEach(function(el){el.tabIndex=Number(el.dataset.previousTab);delete el.dataset.previousTab;});
     var target=$(returnFocus);if(target&&!target.disabled)focus(returnFocus);else focus('tv-next');
-    if(!document.activeElement||document.activeElement.disabled||!document.activeElement.getClientRects().length)focus('tv-play');
+    if(!document.activeElement||document.activeElement.disabled||!document.activeElement.getClientRects().length)focus('tv-follow-toggle');
+    if(state.screen==='lesson'&&!$('tv-lesson').classList.contains('tv-routine-open'))resumeMedia();
   }
   function updateTimers(){
     if(state.deadline!==null){state.remaining=Math.max(0,Math.ceil((state.deadline-Date.now())/1000));if(state.remaining===0){state.deadline=null;if(state.follow)notice('已到 30 分钟；按自己的状态完成当前动作或结束训练。');else{pauseMedia();renderRoutine('cooldown');notice('30 分钟到了，请轻柔放松。');}}}
@@ -210,7 +200,6 @@
     if(key==='Escape'||key==='Backspace'||key==='BrowserBack'||key==='GoBack'||code===4||code===461){
       if(state.restOpen){event.preventDefault();closeRest();}else if(state.screen==='lesson'){event.preventDefault();home();}return;
     }
-    if(key==='MediaPlayPause'&&state.screen==='lesson'&&!state.restOpen){event.preventDefault();togglePlay();}
     if(key==='Tab'&&state.restOpen){var list=buttons(),i=list.indexOf(document.activeElement);event.preventDefault();if(list.length)list[(i+(event.shiftKey?-1:1)+list.length)%list.length].focus();}
   });
   $('tv-guide').addEventListener('keydown',function(event){
@@ -218,10 +207,10 @@
     var down=event.key==='ArrowDown',canScroll=down?this.scrollTop+this.clientHeight<this.scrollHeight-2:this.scrollTop>2;
     if(canScroll){event.preventDefault();event.stopPropagation();this.scrollTop+=down?120:-120;}
   });
-  document.addEventListener('visibilitychange',function(){if(document.hidden){pauseMedia();pauseSession();pauseFollow();}});
+  document.addEventListener('visibilitychange',function(){if(document.hidden){pauseMedia();pauseSession();pauseFollow();}else if(state.screen==='lesson'&&!state.restOpen&&!$('tv-lesson').classList.contains('tv-routine-open'))resumeMedia();});
   window.addEventListener('pagehide',function(){pauseMedia();pauseSession();pauseFollow();});
-  $('tv-home-button').onclick=home;$('tv-play').onclick=togglePlay;$('tv-previous').onclick=function(){changeAction(-1);};$('tv-next').onclick=function(){changeAction(1);};
-  $('tv-warmup').onclick=function(){if(state.routine==='warmup'&&!$('tv-routine-content').hidden){$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');}else renderRoutine('warmup');};$('tv-cooldown').onclick=function(){if(state.routine==='cooldown'&&!$('tv-routine-content').hidden){$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');}else renderRoutine('cooldown');};$('tv-follow-toggle').onclick=toggleFollow;$('tv-follow-skip').onclick=skipFollow;
+  $('tv-home-button').onclick=home;$('tv-previous').onclick=function(){changeAction(-1);};$('tv-next').onclick=function(){changeAction(1);};
+  $('tv-warmup').onclick=function(){if(state.routine==='warmup'&&!$('tv-routine-content').hidden){$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();}else renderRoutine('warmup');};$('tv-cooldown').onclick=function(){if(state.routine==='cooldown'&&!$('tv-routine-content').hidden){$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();}else renderRoutine('cooldown');};$('tv-follow-toggle').onclick=toggleFollow;$('tv-follow-skip').onclick=skipFollow;
   $('tv-complete').onclick=function(){stopFollow();var target=current()[1];if(completed()>=target)return;state.done[key()]=completed()+1;updateProgress();var lastSet=completed()>=target,lastAction=state.index===PLAN[state.day].exercises.length-1;if(lastSet&&lastAction){pauseSession();renderRoutine('cooldown');notice('正式训练结束，请按今日放松卡慢慢收尾。');}else openRest(lastSet?50:30,'tv-complete');};
   $('tv-rest').onclick=function(){pauseFollow();openRest(30,'tv-rest');};$('tv-rest-continue').onclick=closeRest;$('tv-rest-90').onclick=function(){state.restDeadline=Date.now()+90000;$('tv-rest-note').textContent='秒 · 感觉准备好再开始下一组';$('tv-rest-continue').textContent='结束休息';updateTimers();};$('tv-session').onclick=toggleSession;
   $('tv-rest-undo').onclick=function(){state.done[key()]=Math.max(0,completed()-1);updateProgress();closeRest();focus('tv-complete');};
