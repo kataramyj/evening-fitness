@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1167",
+    "title": "动态胸部活动",
+    "file": "assets/warmup/dynamic-chest.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/1167-3uj0Ozg.gif",
+    "bytes": 69828,
+    "sha256": "5025b68b5d7625958def63bb0fa4a32f062ac13cf6b8b1c32044fe9226e2f443",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  },
+  {
+    "id": "1364",
+    "title": "站姿骨盆活动",
+    "file": "assets/warmup/standing-pelvic-tilt.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/1364-cuKYxhu.gif",
+    "bytes": 72271,
+    "sha256": "936c82509afb29be7d8bf96dbaf5772b0358403ee1c143e4901439819b05a258",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  },
+  {
+    "id": "1368",
+    "title": "脚踝绕圈",
+    "file": "assets/warmup/ankle-circles.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/1368-uL9CsKm.gif",
+    "bytes": 67960,
+    "sha256": "9db2b9ac2818fd4f5de0cbcf18a1bf067e923e6f5ba2c1aeaa8a2eb711d79758",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  },
+  {
+    "id": "3147",
+    "title": "仰卧骨盆轻倾",
+    "file": "assets/warmup/pelvic-tilt.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/3147-NKJ8o6x.gif",
+    "bytes": 83086,
+    "sha256": "6ecd532c6b4d9a438ce82dd07ae563bc7dad1a53e7666a51c8d25cf932de6bfb",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  },
+  {
+    "id": "1346",
+    "title": "跪姿背阔肌舒展",
+    "file": "assets/warmup/kneeling-lat-stretch.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/1346-f38OEuO.gif",
+    "bytes": 69095,
+    "sha256": "a26bda31f78c20d68aae97ce0ab23676385743f72cc633b026b5e640f8b61342",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  },
+  {
+    "id": "0613",
+    "title": "侧卧大腿前侧舒展",
+    "file": "assets/warmup/side-lying-quad-stretch.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/0613-BWnJR72.gif",
+    "bytes": 69123,
+    "sha256": "a267ff799d08b961611ca6181c736a69ddcfbec3262d4cc9504f7de0d56e0c0e",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  },
+  {
+    "id": "1377",
+    "title": "扶墙小腿舒展",
+    "file": "assets/warmup/wall-calf-stretch.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/1377-m0tCHqc.gif",
+    "bytes": 82277,
+    "sha256": "01446ed48b032bc85b69200151be5560970748ee627626d17d658ba4ffde2116",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  },
+  {
+    "id": "1424",
+    "title": "坐姿臀部舒展",
+    "file": "assets/warmup/seated-glute-stretch.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/1424-DeDThfG.gif",
+    "bytes": 121069,
+    "sha256": "68823eeee84dde3a76730417dd0713d0d640bd9f322896c802c9c48250b22673",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  },
+  {
+    "id": "1576",
+    "title": "仰卧腿后侧舒展",
+    "file": "assets/warmup/supine-hamstring-stretch.gif",
+    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/1576-sU5BrfP.gif",
+    "bytes": 71993,
+    "sha256": "803bad1c46a93ca8804fb19f3bfbb494f5c755941345793a6caa2e97ec1b01a0",
+    "attribution": "© Gym visual — https://gymvisual.com/",
+    "resolution": "180×180"
+  }
+]

@@ -1,0 +1,24 @@
+:root {
+  --color-paper: #f6f5ef;
+  --color-surface: #fdfcf7;
+  --color-paper-2: #e9ece3;
+  --color-ink: #24392e;
+  --color-muted: #586357;
+  --color-accent: #345e45;
+  --color-accent-ink: #fdfcf7;
+  --color-rule: #c8cfc1;
+  --color-focus: #99632d;
+  --color-error: #92352d;
+  --color-error-paper: #f7e9e1;
+  --color-shadow: #24392e18;
+  --color-backdrop: #18251fcc;
+  --color-transparent: transparent;
+  --font-display: 'Songti SC', 'STSong', 'Noto Serif CJK SC', Georgia, serif;
+  --font-body: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
+  --text-sm: 12px; --text-base: 14px; --text-md: 16px; --text-lg: 22px; --text-xl: 30px;
+  --radius-sm: 4px; --radius-md: 8px;
+  --rule-width: 1px;
+  --dur-fast: 140ms; --ease-out: ease-out;
+}

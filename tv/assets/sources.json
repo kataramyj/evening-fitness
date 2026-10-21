@@ -1,0 +1,171 @@
+{
+  "repository": "https://github.com/hasaneyldrm/exercises-dataset",
+  "retrieved_on": "2026-10-13",
+  "media_downloaded": true,
+  "license": "MIT for text; media copyright Gym visual, original license and notice retained",
+  "selected_ids": [
+    "0276",
+    "0292",
+    "0313",
+    "0361",
+    "0710",
+    "1373",
+    "1459",
+    "1760",
+    "2368",
+    "3013"
+  ],
+  "files": [
+    {
+      "path": "assets/images/0276-iny3m5y.jpg",
+      "original_path": "images/0276-iny3m5y.jpg",
+      "bytes": 5336,
+      "git_blob_sha": "df3343cc6c8a8e97d3adbff1f78c06944fa18bea",
+      "sha256": "c7acc732835d6d4906205b27b0aa8efaf00a6a56c6e4e9e86f320719efff93fe"
+    },
+    {
+      "path": "assets/images/0292-C0MA9bC.jpg",
+      "original_path": "images/0292-C0MA9bC.jpg",
+      "bytes": 8143,
+      "git_blob_sha": "f66478504810a47d8c716de1291bbf93151a37c0",
+      "sha256": "9fb678adf2413d7a8c393806ec03841017123f24d6724249d273dd5ef3af018f"
+    },
+    {
+      "path": "assets/images/0313-slDvUAU.jpg",
+      "original_path": "images/0313-slDvUAU.jpg",
+      "bytes": 5575,
+      "git_blob_sha": "0fdb7445527273510e8e5ee256fb3cd87cc87661",
+      "sha256": "725b9ba4024e389dab5132811cea67aa2a631b1e76d319cd40bdc137c5fb433d"
+    },
+    {
+      "path": "assets/images/0361-84RyJf8.jpg",
+      "original_path": "images/0361-84RyJf8.jpg",
+      "bytes": 5071,
+      "git_blob_sha": "90b619dc6357e5fd7a5dd444fb7e2afcd46ee52b",
+      "sha256": "8ae53295d07c420120d86d67e5b2c02f304c812bdc0fb58c886104d2f6bb36f6"
+    },
+    {
+      "path": "assets/images/0710-7WaDzyL.jpg",
+      "original_path": "images/0710-7WaDzyL.jpg",
+      "bytes": 5415,
+      "git_blob_sha": "5b10f90a93347e9da5cce5226acdc771996876a0",
+      "sha256": "dfc61351b24024144a003c2a5077c42eb71b7aa05952cf9b36f47dd3d39c17b5"
+    },
+    {
+      "path": "assets/images/1373-bJYHBIN.jpg",
+      "original_path": "images/1373-bJYHBIN.jpg",
+      "bytes": 4734,
+      "git_blob_sha": "da501fe9486f6b12c66e5a5441ad81ef72adbcc2",
+      "sha256": "d8e3ad3b3ca701d8a9bddd73e352f5b0a394319691365457ddfbc593a4acdaa2"
+    },
+    {
+      "path": "assets/images/1459-rR0LJzx.jpg",
+      "original_path": "images/1459-rR0LJzx.jpg",
+      "bytes": 5379,
+      "git_blob_sha": "3f39480f9d312742a196c334e439dccb82180eea",
+      "sha256": "3e553d83ba4e68f766ee476edfdedaa16be3f9a85825835aaaf1553222cdb1b4"
+    },
+    {
+      "path": "assets/images/1760-yn8yg1r.jpg",
+      "original_path": "images/1760-yn8yg1r.jpg",
+      "bytes": 5977,
+      "git_blob_sha": "681932b7057de30b393aa38c1075a0eeeda268d4",
+      "sha256": "77b9dd136aeff3264e9309f6c413d473e525f3f411a62572a97af1e3103f837c"
+    },
+    {
+      "path": "assets/images/2368-9E25EOx.jpg",
+      "original_path": "images/2368-9E25EOx.jpg",
+      "bytes": 6112,
+      "git_blob_sha": "cf2aeaa94ccffb1a0b151637e38932419fa46df2",
+      "sha256": "94e60169d7cd16b7a0d1fcf7c841a27effc40fca97e265641af6c1f8950deb73"
+    },
+    {
+      "path": "assets/images/3013-u0cNiij.jpg",
+      "original_path": "images/3013-u0cNiij.jpg",
+      "bytes": 6183,
+      "git_blob_sha": "24a8abd26c9760788268e2ed47e09d7eed93393a",
+      "sha256": "e33b67702a791b83a42b7b436b019f48d1c862b00fb54866661c73c3c9ce58d0"
+    },
+    {
+      "path": "assets/videos/0276-iny3m5y.gif",
+      "original_path": "videos/0276-iny3m5y.gif",
+      "bytes": 74568,
+      "git_blob_sha": "939c5b4e7bcea2bff0dde51424df4c66fe0ab471",
+      "sha256": "c3dde2bfa860d8a141861ee94259e9fafee2096c74cb0553c87a05bae9544b21"
+    },
+    {
+      "path": "assets/videos/0292-C0MA9bC.gif",
+      "original_path": "videos/0292-C0MA9bC.gif",
+      "bytes": 95696,
+      "git_blob_sha": "8b85e52c456352d6558f807c0dbcfb9c4df5027a",
+      "sha256": "c53241038bc290424e72086a7fecf1c367ac53a42f4b5844a4b5314abe56dc44"
+    },
+    {
+      "path": "assets/videos/0313-slDvUAU.gif",
+      "original_path": "videos/0313-slDvUAU.gif",
+      "bytes": 78291,
+      "git_blob_sha": "049134b86af18d0de285e0aa0cc5254e273df029",
+      "sha256": "4f2a6046f7acbb99b55c64316156dbcb19fda5ff4989f8ebfac85ae2480d2342"
+    },
+    {
+      "path": "assets/videos/0361-84RyJf8.gif",
+      "original_path": "videos/0361-84RyJf8.gif",
+      "bytes": 64058,
+      "git_blob_sha": "e85821b13f22c0df8b4acc58e96d0fb49dcd5525",
+      "sha256": "1aecf3bcda1faecb1b6d8cf45a2f45c41c2bf26bf1f3e260a10a3f00e17f388c"
+    },
+    {
+      "path": "assets/videos/0710-7WaDzyL.gif",
+      "original_path": "videos/0710-7WaDzyL.gif",
+      "bytes": 83195,
+      "git_blob_sha": "df3425c7b0df9073c764dde743be76e1ff0d2c2c",
+      "sha256": "9d4ee6d438764abf64e3aaa53c633ee0148a51dcb7d8a21e9d1aadc6af105bd9"
+    },
+    {
+      "path": "assets/videos/1373-bJYHBIN.gif",
+      "original_path": "videos/1373-bJYHBIN.gif",
+      "bytes": 62166,
+      "git_blob_sha": "a8d1ff6f0aacd338285790c6eb40e65334c3ea02",
+      "sha256": "0e5f92103f2e6578a944b22dd23d40a9867250264914aa127481ba5e4147357e"
+    },
+    {
+      "path": "assets/videos/1459-rR0LJzx.gif",
+      "original_path": "videos/1459-rR0LJzx.gif",
+      "bytes": 75427,
+      "git_blob_sha": "0410ea5c647880fef1f98338ee24b04be88eeeac",
+      "sha256": "728b2fd47d29556886078e20d5b60cfa693e7d5e4623e4d1988ab304eb85121e"
+    },
+    {
+      "path": "assets/videos/1760-yn8yg1r.gif",
+      "original_path": "videos/1760-yn8yg1r.gif",
+      "bytes": 68809,
+      "git_blob_sha": "311bc29ae659d86c606c3bfadba38aa219b3e9c2",
+      "sha256": "6a2440b565509a084f97e861dff6a69249f0d52f01730fc628d4698e273b4ea3"
+    },
+    {
+      "path": "assets/videos/2368-9E25EOx.gif",
+      "original_path": "videos/2368-9E25EOx.gif",
+      "bytes": 79451,
+      "git_blob_sha": "5def08f40819dff2b284df2635084a3cb752175b",
+      "sha256": "86fa4061b352353773ed46f59cbb84216ca7eb833459d4eb5aba95def83ad67d"
+    },
+    {
+      "path": "assets/videos/3013-u0cNiij.gif",
+      "original_path": "videos/3013-u0cNiij.gif",
+      "bytes": 86092,
+      "git_blob_sha": "11729443b3d7e24a242871437aa544ee0f3e3c94",
+      "sha256": "0488f6ef2f876420c071a2d4243f1f1574d25bba5b5eb72246da4f130d58ad91"
+    },
+    {
+      "path": "assets/NOTICE.txt",
+      "bytes": 4683,
+      "sha256": "24c958df0c85e915974c25402edf87c7c4c1342eca988f1c497cb19e67742911",
+      "local_note": "Original notice retained; supplemental offline media attribution appended 2026-10-14."
+    },
+    {
+      "path": "assets/exercise-text.json",
+      "bytes": 21733,
+      "sha256": "fef266e28f170fd83ccf4c7a54d6b27ace0f31bc724053550a3384db17d0f609"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "retrieved_on": "2026-10-14",
+  "usage": "Personal local offline study only; no public redistribution permission asserted.",
+  "files": [
+    {
+      "path": "assets/videos/1760-yn8yg1r-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 3899,
+      "sha256": "bab727505205d29bddbe9ecbf8cc09567404efec945c948a35e2a313ff7c4c52"
+    },
+    {
+      "path": "assets/videos/0292-C0MA9bC-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 5217,
+      "sha256": "161a5496a2a3d4ac431c8ccab29af52bad5bf092eaffaa33d5803c8a1fc3950b"
+    },
+    {
+      "path": "assets/videos/1459-rR0LJzx-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 3593,
+      "sha256": "3153cc7d735719050cf15e7fb77d28d1b2f2157c69470e476a1a4a5ab4433197"
+    },
+    {
+      "path": "assets/videos/1373-bJYHBIN-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 3178,
+      "sha256": "2c2877ccb2cfb8aff0bff486d396db7e20a1a77dfb1448ea837c23db53b40166"
+    },
+    {
+      "path": "assets/videos/0710-7WaDzyL-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 3623,
+      "sha256": "5e08e9fdf9971328d80df5625240fee2d56c370bc69170ef1b84a54bcd39ebe5"
+    },
+    {
+      "path": "assets/videos/0313-slDvUAU-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 3723,
+      "sha256": "aa9393f7f65bb5ba62001615367158fc91e79e3454c61da66b8a65a555bb719a"
+    },
+    {
+      "path": "assets/videos/3013-u0cNiij-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 4082,
+      "sha256": "79288c6ceb491e6f5bbab21eb74787bddcc253109313cfe1e3ca0fc77e1ae8ab"
+    },
+    {
+      "path": "assets/videos/0361-84RyJf8-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 3421,
+      "sha256": "6b183ae817d923fcfe849bea1e2cc89126f77005dad4b6fdfd215cc7b19fec7a"
+    },
+    {
+      "path": "assets/videos/0276-iny3m5y-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 3539,
+      "sha256": "40abf41fc14aea711ed4c6e181bbadfccc0d01c4c6f9ef8c447793e4796c2c15"
+    },
+    {
+      "path": "assets/videos/2368-9E25EOx-poster.jpg",
+      "url": "https://github.com/hasaneyldrm/exercises-dataset",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 3957,
+      "sha256": "f1ee046f1e027565279a5cc707a949150898328249952775a6ca511c63bd4e8e"
+    },
+    {
+      "path": "assets/coaching/bent-over-row.gif",
+      "url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0293-BJ0Hz5L.gif",
+      "credit": "Gym visual",
+      "derived_first_frame": false,
+      "bytes": 105292,
+      "sha256": "68b6a883f0232f4c3ee83f4b1f2e4589f50b0b2dbf57864675e610ecda63a544"
+    },
+    {
+      "path": "assets/coaching/side-lying-hip-abduction.mp4",
+      "url": "https://media.physitrack.com/exercises/b39b2f58-b2aa-4760-b781-fbbcbd1a628c/en/video_1280x720.mp4",
+      "credit": "Physitrack",
+      "derived_first_frame": false,
+      "bytes": 1980711,
+      "sha256": "8397e4f360eb4afb0f8d7ce846d987f94c82ffce0b106d75e23c2faad05045a9"
+    },
+    {
+      "path": "assets/coaching/bird-dog-2.mp4",
+      "url": "https://www.lyndhurstchiro.co.uk/wp-content/uploads/2025/09/Bird-Dog-2.mp4",
+      "credit": "Lyndhurst Chiropractic Clinic",
+      "derived_first_frame": false,
+      "bytes": 2811212,
+      "sha256": "71224bb7a8a64825a60681b1217f6d52bf2ab646c33ab4564bdc257e0f43c8d6"
+    },
+    {
+      "path": "assets/coaching/dumbbell-shoulder-press-poster.jpg",
+      "url": "https://www.strengthlog.com/wp-content/uploads/2020/02/Dumbbell-shoulder-press.gif",
+      "credit": "StrengthLog",
+      "derived_first_frame": true,
+      "bytes": 45297,
+      "sha256": "4d60d81d171030c991011e2434b8111a7bba10a887b5d20aa332d9fe3c2f8188"
+    },
+    {
+      "path": "assets/coaching/dumbbell-floor-press.gif",
+      "url": "https://www.strengthlog.com/wp-content/uploads/2022/09/dumbbell-floor-press.gif",
+      "credit": "StrengthLog",
+      "derived_first_frame": false,
+      "bytes": 2763520,
+      "sha256": "1eb2f679b3c574e7ee3178f9dcf250c50ee3fd5c933e12bcff7c112489e42141"
+    },
+    {
+      "path": "assets/coaching/dumbbell-shoulder-press.gif",
+      "url": "https://www.strengthlog.com/wp-content/uploads/2020/02/Dumbbell-shoulder-press.gif",
+      "credit": "StrengthLog",
+      "derived_first_frame": false,
+      "bytes": 1553040,
+      "sha256": "9f4ba84afd5dae8926c16faf8b837fb15462338103a5eb4fc5511ef2585a9deb"
+    },
+    {
+      "path": "assets/coaching/dumbbell-floor-press-poster.jpg",
+      "url": "https://www.strengthlog.com/wp-content/uploads/2022/09/dumbbell-floor-press.gif",
+      "credit": "StrengthLog",
+      "derived_first_frame": true,
+      "bytes": 87605,
+      "sha256": "575fe3e513d1e741bf4e2e367986c89a098349e12844b9eb5021ed2cbb275f53"
+    },
+    {
+      "path": "assets/coaching/dead-bug-1.mp4",
+      "url": "https://www.lyndhurstchiro.co.uk/wp-content/uploads/2025/09/Dead-Bug-1.mp4",
+      "credit": "Lyndhurst Chiropractic Clinic",
+      "derived_first_frame": false,
+      "bytes": 3602002,
+      "sha256": "63563e92f13b82b12cf4157f461ccceaf5ed93ab6a5ef83c0878008fffb0951f"
+    },
+    {
+      "path": "assets/coaching/bent-over-row-poster.jpg",
+      "url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0293-BJ0Hz5L.gif",
+      "credit": "Gym visual",
+      "derived_first_frame": true,
+      "bytes": 5375,
+      "sha256": "a947de07963de39eecfdf2eeace62e87330662bd92e291877bad1229c7801887"
+    },
+    {
+      "path": "assets/coaching/side-plank-knees.mp4",
+      "url": "https://www.lyndhurstchiro.co.uk/wp-content/uploads/2025/09/Side-Plank-Knees.mp4",
+      "credit": "Lyndhurst Chiropractic Clinic",
+      "derived_first_frame": false,
+      "bytes": 1112499,
+      "sha256": "05c4cd915a8d92cda13f145414c52c9093fb6088d40880b1fdf41717360471a6"
+    },
+    {
+      "path": "assets/coaching/dumbbell-glute-bridge.gif",
+      "url": "https://media.self.com/photos/5c181ca67cbe3657017f2e53/master/w_320,c_limit/weighted-bridge-rachel.gif",
+      "credit": "SELF / Condé Nast; demonstrator Rachel Denis",
+      "derived_first_frame": false,
+      "bytes": 204828,
+      "sha256": "d616a3036db0562f2b7af7e8ac6cc1f394ead53c1aa9520ca3da0555a0a14274"
+    },
+    {
+      "path": "assets/coaching/dumbbell-glute-bridge-poster.jpg",
+      "url": "https://media.self.com/photos/5c181ca67cbe3657017f2e53/master/w_320,c_limit/weighted-bridge-rachel.gif",
+      "credit": "SELF / Condé Nast; demonstrator Rachel Denis",
+      "derived_first_frame": true,
+      "bytes": 9076,
+      "sha256": "bf80182721a25eb6803e426d5756bb21a6a744b07ed2b8bc98d42e0b1622c656"
+    }
+  ]
+}

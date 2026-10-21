@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="lola 的电视训练教学：遥控器操作、动态示范与同屏动作步骤。">
+  <title>电视跟练 · 晚间半小时</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="tv.css">
+  <script defer src="plan.js"></script>
+  <script defer src="coaching.js"></script>
+  <script defer src="tv-data.js"></script>
+  <script defer src="tv.js"></script>
+</head>
+<body>
+  <div class="tv-shell">
+    <header class="tv-header"><div id="tv-brand" class="tv-brand">晚间半小时 <span>电视跟练</span></div><div id="tv-header-lesson" class="tv-lesson-heading" hidden><div><p id="tv-position"></p><h1 id="tv-action-name"></h1><p id="tv-dose"></p></div><div class="tv-clock"><strong id="tv-session-time">30:00</strong><span id="tv-session-stage">5 分钟热身起步</span></div></div><button id="tv-home-button" hidden>选择训练日</button></header>
+    <main id="tv-main">
+      <section id="tv-home" aria-labelledby="tv-home-title">
+        <div class="tv-home-intro"><h1 id="tv-home-title">今天练哪一部分？</h1><p id="tv-today"></p></div>
+        <div id="tv-days" class="tv-days" aria-label="选择训练日"></div>
+        <p class="tv-home-bottom">方向键选训练日 · 确认键开始</p>
+      </section>
+      <section id="tv-lesson" hidden aria-labelledby="tv-action-name">
+        <section class="tv-routine" aria-label="热身和放松"><button id="tv-warmup" class="tv-routine-tab">今日热身</button><button id="tv-cooldown" class="tv-routine-tab">今日放松</button><div id="tv-routine-content" class="tv-routine-content" hidden></div></section>
+        <div id="tv-follow-panel" class="tv-follow-panel" role="status"><strong id="tv-follow-main">准备跟练</strong><span id="tv-follow-detail">每次约 4 秒；倒计时是节奏提示，不检测动作。</span><button id="tv-follow-toggle" class="tv-primary">开始自动跟练</button><button id="tv-follow-skip" hidden>跳过本阶段</button></div>
+        <div class="tv-stage">
+          <div class="tv-demonstration"><div id="tv-media" class="tv-media"></div><p id="tv-media-status" role="status"></p><div class="tv-media-caption"><span id="tv-media-credit"></span><span id="tv-media-quality"></span></div></div>
+          <section class="tv-instruction" aria-labelledby="tv-guide-title"><div class="tv-page-heading"><h2 id="tv-guide-title">动作要领</h2></div><div id="tv-guide" tabindex="0" aria-label="动作步骤，可用方向键滚动"><ol id="tv-steps"></ol><div class="tv-cues"><p id="tv-equipment"></p><p id="tv-load"></p><p id="tv-mistakes"></p></div></div></section>
+        </div>
+        <div class="tv-controls" aria-label="跟练控制"><button id="tv-previous">上一动作</button><button id="tv-play" class="tv-primary">播放示范</button><button id="tv-next">下一动作</button><button id="tv-complete">本组完成</button><button id="tv-rest">休息 60 秒</button><button id="tv-session">开始 30 分钟</button></div>
+      </section>
+    </main>
+    <section id="tv-rest-panel" class="tv-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="tv-rest-title"><div class="tv-rest-content"><h2 id="tv-rest-title">缓一缓，恢复呼吸。</h2><strong id="tv-rest-time">60</strong><p id="tv-rest-note">秒 · 感觉准备好再开始下一组</p><div class="tv-rest-actions"><button id="tv-rest-continue" class="tv-primary">结束休息</button><button id="tv-rest-90">改为 90 秒</button><button id="tv-rest-undo" hidden>撤回本组</button></div><p>倒计时结束后也不会自动开始动作。</p></div></section>
+    <div id="tv-notice" class="tv-notice" role="status" hidden></div>
+    <noscript>此页面需要浏览器启用 JavaScript。若 ES 只显示文件内容，请选择“用浏览器打开”完整文件夹中的 tv.html。</noscript>
+  </div>
+</body>
+</html>

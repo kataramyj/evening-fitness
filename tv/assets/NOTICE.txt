@@ -1,0 +1,83 @@
+用户明确要求相关动作资料用于个人本地手册。保存了选用的中英文文字、原始缩略图和 GIF，未公开发布。媒体保留 © Gym visual 署名与原始分辨率。文字适用 MIT，媒体仍适用下列独立条款。原创姿势线条独立于第三方媒体。
+
+MIT License
+
+Copyright (c) 2026 Hasan Emir Yıldırım
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation and data files (the "Software"),
+to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+------------------------------------------------------------------------------
+MEDIA EXCEPTION
+------------------------------------------------------------------------------
+
+The MIT license above covers ONLY the code, tooling, dataset structure, and
+instruction text/translations in this repository.
+
+It DOES NOT cover the exercise media in the `images/` and `videos/`
+directories. That media is © Gym visual (https://gymvisual.com/) and is
+included here with the rights holder's written permission, at 180×180
+resolution, and must retain the attribution "© Gym visual —
+https://gymvisual.com/". Its use and reuse are governed by Gym visual's Terms
+& Conditions (https://gymvisual.com/content/3-terms-and-conditions-of-use) and
+by `NOTICE.md` in this repository — NOT by the MIT license above. Cloning this
+repository does not grant you any license to the media; obtain your own from
+Gym visual.
+
+
+# Media Attribution & License
+
+The exercise **media** (thumbnail images and animation GIFs) in this repository
+is the property of **Gym visual** and is redistributed here **with permission**.
+
+> **© Gym visual — https://gymvisual.com/**
+
+## Terms
+
+Per the rights holder's permission, the media is included under the following terms:
+
+- **Resolution:** distributed at **180×180** only.
+- **Attribution:** every use must carry the copyright indication
+  **© Gym visual — https://gymvisual.com/**. Each record in
+  [`data/exercises.json`](data/exercises.json) also carries an `attribution`
+  field with this notice.
+
+If you use this media, keep the attribution intact and respect the 180×180
+resolution limit.
+
+## Reuse & licensing
+
+The media is included here with the rights holder's **separate written
+permission** (the mechanism Gym visual's terms require for redistribution). It
+remains the property of Gym visual, and its use and reuse are governed by
+**Gym visual's Terms & Conditions of Use**:
+
+> **https://gymvisual.com/content/3-terms-and-conditions-of-use**
+
+If you want to use this media in your own project, review those terms and, where
+required, obtain your own license directly from Gym visual. **This repository
+does not grant you any rights to the media beyond what Gym visual's terms
+allow** — cloning this repo is not a license.
+
+## Dataset (non-media)
+
+The exercise **data** (names, categories, body parts, equipment, targets,
+muscle groups, and multilingual instructions) is separate from the media and
+is released under the MIT License — see [`LICENSE`](LICENSE).
+
+2026-10-14 additional demonstrations: StrengthLog (floor press / standing double dumbbell shoulder press), Lyndhurst Chiropractic Clinic (bird dog / single-limb dead bug / knee side plank), Physitrack (side-lying hip abduction), SELF / Condé Nast (dumbbell bridge, demonstrator Rachel Denis), Gym visual via exercises-dataset (0293 bent-over row). All rights remain with original owners. Publicly accessible files downloaded for this user's private offline study, not licensed for public redistribution. The text dataset's MIT license does not cover these independent media. Full original demo files retain branding; JPEG posters are derived first frames. See coaching-sources.json for original media URLs and checksums. No professional review of our adapted Chinese coaching text is claimed.
