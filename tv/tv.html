@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="tv-shell">
-    <header class="tv-header"><div id="tv-brand" class="tv-brand">晚间半小时 <span>电视跟练</span></div><div id="tv-header-lesson" class="tv-lesson-heading" hidden><div><p id="tv-position"></p><h1 id="tv-action-name"></h1><p id="tv-dose"></p></div><div class="tv-clock"><strong id="tv-session-time">30:00</strong><span id="tv-session-stage">5 分钟热身起步</span></div></div><div id="tv-follow-orb" class="tv-follow-orb" hidden aria-live="off"><span id="tv-follow-phase">动作</span><strong id="tv-follow-count">4</strong><span id="tv-follow-progress">1 / 10</span></div><button id="tv-home-button" hidden>选择训练日</button></header>
+    <header class="tv-header"><div id="tv-brand" class="tv-brand">晚间半小时 <span>电视跟练</span></div><div id="tv-header-lesson" class="tv-lesson-heading" hidden><div><p id="tv-position"></p><h1 id="tv-action-name"></h1><p id="tv-dose"></p></div><div class="tv-clock"><strong id="tv-session-time">30:00</strong><span id="tv-session-stage">5 分钟热身起步</span></div></div><div id="tv-follow-orb" class="tv-follow-orb" hidden aria-live="off"><span id="tv-follow-phase">动作</span><strong id="tv-follow-count">1</strong><span id="tv-follow-progress">/ 15</span></div><button id="tv-home-button" hidden>选择训练日</button></header>
     <main id="tv-main">
       <section id="tv-home" aria-labelledby="tv-home-title">
         <div class="tv-home-intro"><h1 id="tv-home-title">今天练哪一部分？</h1><p id="tv-today"></p></div>
@@ -23,15 +23,15 @@
       </section>
       <section id="tv-lesson" hidden aria-labelledby="tv-action-name">
         <section class="tv-routine" aria-label="热身和放松"><button id="tv-warmup" class="tv-routine-tab">今日热身</button><button id="tv-cooldown" class="tv-routine-tab">今日放松</button><div id="tv-routine-content" class="tv-routine-content" hidden></div></section>
-        <div id="tv-follow-panel" class="tv-follow-panel"><button id="tv-follow-toggle" class="tv-primary">开始自动跟练</button><button id="tv-follow-skip" hidden>跳过本阶段</button><span class="tv-follow-hint">按圆内节奏做；倒计时不检测实际完成。</span></div>
+        <div id="tv-follow-panel" class="tv-follow-panel"><button id="tv-follow-toggle" class="tv-primary">开始自动跟练</button><button id="tv-follow-skip" hidden>跳过本阶段</button><span class="tv-follow-hint">圆心数次数，外环走 5 秒；计时不检测实际完成。</span></div>
         <div class="tv-stage">
           <div class="tv-demonstration"><div id="tv-media" class="tv-media"></div><p id="tv-media-status" role="status"></p><div class="tv-media-caption"><span id="tv-media-credit"></span><span id="tv-media-quality"></span></div></div>
           <section class="tv-instruction" aria-labelledby="tv-guide-title"><div class="tv-page-heading"><h2 id="tv-guide-title">动作要领</h2></div><div id="tv-guide" tabindex="0" aria-label="动作步骤，可用方向键滚动"><ol id="tv-steps"></ol><div class="tv-cues"><p id="tv-equipment"></p><p id="tv-load"></p><p id="tv-mistakes"></p></div></div></section>
         </div>
-        <div class="tv-controls" aria-label="跟练控制"><button id="tv-previous">上一动作</button><button id="tv-play" class="tv-primary">播放示范</button><button id="tv-next">下一动作</button><button id="tv-complete">本组完成</button><button id="tv-rest">休息 60 秒</button><button id="tv-session">开始 30 分钟</button></div>
+        <div class="tv-controls" aria-label="跟练控制"><button id="tv-previous">上一动作</button><button id="tv-play" class="tv-primary">播放示范</button><button id="tv-next">下一动作</button><button id="tv-complete">本组完成</button><button id="tv-rest">休息 30 秒</button><button id="tv-session">开始 30 分钟</button></div>
       </section>
     </main>
-    <section id="tv-rest-panel" class="tv-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="tv-rest-title"><div class="tv-rest-content"><h2 id="tv-rest-title">缓一缓，恢复呼吸。</h2><strong id="tv-rest-time">60</strong><p id="tv-rest-note">秒 · 感觉准备好再开始下一组</p><div class="tv-rest-actions"><button id="tv-rest-continue" class="tv-primary">结束休息</button><button id="tv-rest-90">改为 90 秒</button><button id="tv-rest-undo" hidden>撤回本组</button></div><p>倒计时结束后也不会自动开始动作。</p></div></section>
+    <section id="tv-rest-panel" class="tv-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="tv-rest-title"><div class="tv-rest-content"><h2 id="tv-rest-title">缓一缓，恢复呼吸。</h2><strong id="tv-rest-time">30</strong><p id="tv-rest-note">秒 · 感觉准备好再开始下一组</p><div class="tv-rest-actions"><button id="tv-rest-continue" class="tv-primary">结束休息</button><button id="tv-rest-90">改为 90 秒</button><button id="tv-rest-undo" hidden>撤回本组</button></div><p>手动休息结束后，确认准备好再继续。</p></div></section>
     <div id="tv-notice" class="tv-notice" role="status" hidden></div>
     <noscript>此页面需要浏览器启用 JavaScript。请在支持 JavaScript 的电视浏览器中打开网页。</noscript>
   </div>
