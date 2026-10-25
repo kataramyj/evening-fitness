@@ -53,3 +53,8 @@
 ## 2026-10-21 媒体自动播放
 - 跟练控制栏单行显示开始/暂停与跳过，不放固定说明文字；正式动作 GIF 和静音 MP4 在进入动作时自动播放。
 - 正常播放不显示独立播放按钮；若视频自动播放失败，显示错误与视频原生控制作为后备。离开或休息时暂停，返回动作时恢复。
+
+## 2026-10-25 离线 Android TV 构建
+- `android-tv/` 是只封装现有 `tv/` 的 Android 外壳；网页、GIF 和 MP4 仍以 `tv/` 为唯一来源。Gradle 构建时复制它们到 APK assets，不提交复制产物。
+- `.github/workflows/android-tv.yml` 用 GitHub 托管构建器生成可侧载的 debug APK，仅上传 Actions artifact，不创建 Release、不自动部署。修改工作流和推送均遵守用户明确授权边界。
+- 应用无网络、存储权限；使用 WebViewAssetLoader 加载打包资源，启用 JS 和媒体，电视遥控器可返回。构建和电视实测必须分别记录。

@@ -1,5 +1,9 @@
 # 晚间半小时
 
+## 电视离线 APK
+
+`android-tv/` 是电视版离线应用外壳，构建时直接把 `tv/` 的网页、GIF 和视频打包进 APK。GitHub Actions 的 **Build offline Android TV APK** 工作流生成 `evening-fitness-tv-apk` 下载包；解压后的 `app-debug.apk` 可复制到 Android TV 安装。应用无网络或文件访问权限，电视无需访问 Vercel、CloudBase，也无需电脑常开。更新需要重新下载并侧载 APK；不同构建的 debug 签名可能变化，覆盖安装失败时先卸载旧版。电视端不保存打卡记录。
+
 个人训练计划与打卡网页，周一胸背、周二腿、周三核心、周四臀；21:00–21:30。周五至周日不安排训练。
 
 下载仓库后打开根目录 index.html，无需安装依赖。页面包含新版计划、动作步骤、负重摆位、常见错误、出处、打卡和反馈、次日睡眠补记、JSON 备份导入导出。
