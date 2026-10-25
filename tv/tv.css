@@ -92,7 +92,14 @@ body{font-size:clamp(13px,2.1vh,23px)}
 #tv-dose{font-size:clamp(13px,2.35vh,26px);line-height:1.22}
 .tv-clock strong{font-size:clamp(26px,4.7vh,52px)}
 .tv-clock span{font-size:clamp(11px,1.8vh,20px)}
-.tv-follow-orb{width:10vh;height:10vh;min-width:54px;min-height:54px}
+.tv-follow-orb{position:fixed;top:1.7vh;right:2vw;z-index:5;width:10vh;height:10vh;min-width:54px;min-height:54px}
+.tv-follow-orb{background:var(--color-accent)}
+.tv-follow-ring{position:absolute;inset:0;width:100%;height:100%;z-index:2;overflow:visible;transform:rotate(-90deg)}
+.tv-follow-ring circle{fill:none;stroke-width:7}
+.tv-follow-ring-track{stroke:var(--color-rule)}
+.tv-follow-ring-progress{stroke:var(--color-focus);stroke-linecap:round;stroke-dasharray:276.46;stroke-dashoffset:0}
+.tv-follow-orb span,.tv-follow-orb strong{z-index:3}
+.tv-header-lesson-open #tv-home-button{margin-right:12vh}
 .tv-follow-orb::before{inset:.8vh}
 .tv-follow-orb strong{font-size:clamp(25px,4.5vh,50px)}
 .tv-follow-orb span{font-size:clamp(9px,1.25vh,15px)}
@@ -113,12 +120,12 @@ body{font-size:clamp(13px,2.1vh,23px)}
 .tv-page-heading h2{font-size:clamp(16px,2.45vh,28px)}
 #tv-guide{min-height:0;overflow-y:auto;padding:0 .25vw 0 0}
 #tv-steps{gap:.7vh}
-#tv-steps li{font-size:clamp(12px,1.95vh,22px);line-height:1.26;padding-left:clamp(23px,2.4vw,39px)}
+#tv-steps li{font-size:clamp(11px,1.72vh,19px);line-height:1.23;padding-left:clamp(23px,2.4vw,39px)}
 #tv-steps li::before{width:clamp(18px,2.1vh,27px);height:clamp(18px,2.1vh,27px);font-size:clamp(11px,1.55vh,18px)}
 .tv-cues{margin-top:.8vh;padding-top:.7vh;gap:.45vh;border-top-width:1px}
-.tv-cues p{font-size:clamp(11px,1.75vh,20px);line-height:1.28}
-.tv-guide-compact #tv-steps li{font-size:clamp(11px,1.7vh,19px);line-height:1.19}
-.tv-guide-compact .tv-cues p{font-size:clamp(10px,1.55vh,17px);line-height:1.2}
+.tv-cues p{font-size:clamp(10px,1.56vh,17px);line-height:1.23}
+.tv-guide-compact #tv-steps li{font-size:clamp(10px,1.55vh,17px);line-height:1.18}
+.tv-guide-compact .tv-cues p{font-size:clamp(9px,1.4vh,15px);line-height:1.18}
 .tv-guide-compact #tv-steps{gap:.35vh}
 .tv-controls{flex:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8vw}
 .tv-controls button{height:7vh;min-height:0;padding:.4vh .5vw;font-size:clamp(13px,2vh,22px)}
@@ -135,6 +142,7 @@ body{font-size:clamp(13px,2.1vh,23px)}
 .tv-routine-open .tv-stage{display:none}
 button{position:relative;transition:transform 140ms ease-out,box-shadow 140ms ease-out,background-color 140ms ease-out,color 140ms ease-out}
 button:focus:not(:disabled),button:focus-visible:not(:disabled){z-index:2;outline:0;border-color:var(--color-focus);background:var(--color-focus);color:var(--color-accent-ink);transform:translateY(-.35vh) scale(1.045);box-shadow:0 0 0 2px var(--color-surface),0 .9vh 2vh var(--color-shadow-strong)}
+button.tv-remote-focused:not([disabled]){z-index:4;outline:0!important;border-color:var(--color-focus)!important;background:var(--color-focus)!important;color:var(--color-accent-ink)!important;transform:translateY(-6px) scale(1.08)!important;box-shadow:0 0 0 3px var(--color-surface),0 12px 28px var(--color-shadow-strong)!important}
 button:active:not(:disabled){transform:translateY(0) scale(.99);box-shadow:0 .25vh .7vh var(--color-shadow-strong)}
 #tv-guide:focus{outline:2px solid var(--color-focus);outline-offset:-2px}
 #tv-home{min-height:0;gap:3vh}

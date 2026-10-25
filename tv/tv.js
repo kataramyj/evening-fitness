@@ -7,7 +7,11 @@
   var state={day:1,index:0,screen:'home',variants:{bridge:'dumbbell'},done:{},remaining:1800,deadline:null,restDeadline:null,restOpen:false,follow:null,routine:null};
   var noticeTimeout,mediaToken=0,returnFocus='tv-rest';
   var names=['周日','周一','周二','周三','周四','周五','周六'];
-  function focus(id){var el=$(id);if(el&&!el.disabled&&!el.hidden){try{el.focus({preventScroll:true});}catch(e){el.focus();}}}
+  function focus(id){var el=$(id);if(el&&!el.disabled&&!el.hidden){try{el.focus({preventScroll:true});}catch(e){el.focus();}markRemoteFocus(el);}}
+  function markRemoteFocus(el){
+    document.querySelectorAll('.tv-remote-focused').forEach(function(button){button.classList.remove('tv-remote-focused');});
+    if(el&&el.tagName==='BUTTON'&&!el.disabled)el.classList.add('tv-remote-focused');
+  }
   function notice(text){$('tv-notice').textContent=text;$('tv-notice').hidden=false;clearTimeout(noticeTimeout);noticeTimeout=setTimeout(function(){$('tv-notice').hidden=true;},6500);}
   function current(){return PLAN[state.day].exercises[state.index];}
   function key(){return state.day+':'+current()[0]+':'+(current()[0]==='bridge'?'dumbbell':'body');}
@@ -37,6 +41,7 @@
     var ex=exercise(),item=current(),id=item[0],dose=id==='sideplank'?'每侧 15 秒':/^(split|abduction|deadbug|birddog)$/.test(id)?'每侧 15 次':'15 次';
     $('tv-dose').textContent=dose+' × '+item[1]+' 组 · '+ex.equipment.replace(/；记录.*$/,'')+' · 跟练进度 '+completed()+'/'+item[1]+' 组';
     $('tv-complete').disabled=completed()>=item[1];$('tv-complete').textContent=completed()>=item[1]?'本动作已做完':'本组完成';
+    if($('tv-complete').disabled)$('tv-complete').classList.remove('tv-remote-focused');
   }
   function status(text,error){$('tv-media-status').textContent=text;$('tv-media-status').setAttribute('data-error',error?'true':'false');}
   function pauseMedia(){
@@ -110,7 +115,7 @@
     var count=f.mode==='work'?(current()[0]==='sideplank'?n:followCount(f.rep)):n;
     var progress=f.mode==='work'?(current()[0]==='sideplank'?'秒 · 第 '+(completed()+1)+' 组':'/ 15'):f.mode==='rest'?'秒后继续':'秒后换边';
     orb.hidden=false;orb.dataset.mode=f.mode;orb.dataset.paused=f.paused?'true':'false';
-    orb.style.setProperty('--ring-angle',Math.round(360*left/f.duration)+'deg');
+    $('tv-follow-ring-progress').style.strokeDashoffset=String(276.46*(1-left/f.duration));
     $('tv-follow-phase').textContent=phase;$('tv-follow-count').textContent=String(count);$('tv-follow-progress').textContent=progress;
     orb.setAttribute('aria-label',phase+'，'+(f.mode==='work'&&current()[0]!=='sideplank'?'第 '+count+' 次，当前动作剩余 '+n+' 秒': '剩余 '+n+' 秒')+'，'+progress);
     $('tv-follow-toggle').textContent=f.paused?'继续跟练':'暂停跟练';$('tv-follow-skip').hidden=false;$('tv-follow-skip').textContent=f.mode==='rest'?'结束休息':f.mode==='prepare'?'开始另一侧':'跳过这一次';
@@ -199,7 +204,7 @@
       var score=forward+perpendicular*3+perpendicular*perpendicular/Math.max(forward,1);
       if(score<bestScore){bestScore=score;best=el;}
     });
-    if(best){best.focus();try{best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'auto'});}catch(e){best.scrollIntoView(false);}}
+    if(best){best.focus();markRemoteFocus(best);try{best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'auto'});}catch(e){best.scrollIntoView(false);}}
   }
   document.addEventListener('keydown',function(event){
     var key=event.key,code=event.keyCode;
@@ -212,6 +217,10 @@
       if(state.restOpen){event.preventDefault();closeRest();}else if(state.screen==='lesson'){event.preventDefault();home();}return;
     }
     if(key==='Tab'&&state.restOpen){var list=buttons(),i=list.indexOf(document.activeElement);event.preventDefault();if(list.length)list[(i+(event.shiftKey?-1:1)+list.length)%list.length].focus();}
+  });
+  document.addEventListener('focusin',function(event){markRemoteFocus(event.target);});
+  document.addEventListener('focusout',function(event){
+    if(event.target.classList)event.target.classList.remove('tv-remote-focused');
   });
   $('tv-guide').addEventListener('keydown',function(event){
     if(event.key!=='ArrowDown'&&event.key!=='ArrowUp')return;
