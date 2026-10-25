@@ -21,6 +21,17 @@
     $('tv-load').textContent=tvCopy(ex.load);
     $('tv-mistakes').textContent='注意：'+ex.mistakes.join('；');
     $('tv-guide').scrollTop=0;
+    fitGuide();
+  }
+  function fitGuide(){
+    requestAnimationFrame(function(){
+      var guide=$('tv-guide');
+      if(!$('tv-lesson').classList.contains('tv-routine-open')){
+        guide.classList.remove('tv-guide-compact');
+        if(guide.scrollHeight>guide.clientHeight+2)guide.classList.add('tv-guide-compact');
+        guide.tabIndex=guide.scrollHeight>guide.clientHeight+2?0:-1;
+      }
+    });
   }
   function updateProgress(){
     var ex=exercise(),item=current(),id=item[0],dose=id==='sideplank'?'每侧 15 秒':/^(split|abduction|deadbug|birddog)$/.test(id)?'每侧 15 次':'15 次';
@@ -109,7 +120,7 @@
   function toggleFollow(){
     var f=state.follow;if(f){if(f.paused){f.deadline=Date.now()+f.left;f.paused=false;}else pauseFollow();renderFollow();return;}
     if(completed()>=current()[1]){notice('这个动作的组数已完成，请选择下一动作。');return;}
-    state.follow={mode:'work',rep:0,side:1,paused:false};$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();
+    state.follow={mode:'work',rep:0,side:1,paused:false};$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();fitGuide();
     followStage('work',followSeconds());
   }
   function finishFollowSet(){
@@ -210,7 +221,7 @@
   document.addEventListener('visibilitychange',function(){if(document.hidden){pauseMedia();pauseSession();pauseFollow();}else if(state.screen==='lesson'&&!state.restOpen&&!$('tv-lesson').classList.contains('tv-routine-open'))resumeMedia();});
   window.addEventListener('pagehide',function(){pauseMedia();pauseSession();pauseFollow();});
   $('tv-home-button').onclick=home;$('tv-previous').onclick=function(){changeAction(-1);};$('tv-next').onclick=function(){changeAction(1);};
-  $('tv-warmup').onclick=function(){if(state.routine==='warmup'&&!$('tv-routine-content').hidden){$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();}else renderRoutine('warmup');};$('tv-cooldown').onclick=function(){if(state.routine==='cooldown'&&!$('tv-routine-content').hidden){$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();}else renderRoutine('cooldown');};$('tv-follow-toggle').onclick=toggleFollow;$('tv-follow-skip').onclick=skipFollow;
+  $('tv-warmup').onclick=function(){if(state.routine==='warmup'&&!$('tv-routine-content').hidden){$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();fitGuide();}else renderRoutine('warmup');};$('tv-cooldown').onclick=function(){if(state.routine==='cooldown'&&!$('tv-routine-content').hidden){$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();fitGuide();}else renderRoutine('cooldown');};$('tv-follow-toggle').onclick=toggleFollow;$('tv-follow-skip').onclick=skipFollow;
   $('tv-complete').onclick=function(){stopFollow();var target=current()[1];if(completed()>=target)return;state.done[key()]=completed()+1;updateProgress();var lastSet=completed()>=target,lastAction=state.index===PLAN[state.day].exercises.length-1;if(lastSet&&lastAction){pauseSession();renderRoutine('cooldown');notice('正式训练结束，请按今日放松卡慢慢收尾。');}else openRest(lastSet?50:30,'tv-complete');};
   $('tv-rest').onclick=function(){pauseFollow();openRest(30,'tv-rest');};$('tv-rest-continue').onclick=closeRest;$('tv-rest-90').onclick=function(){state.restDeadline=Date.now()+90000;$('tv-rest-note').textContent='秒 · 感觉准备好再开始下一组';$('tv-rest-continue').textContent='结束休息';updateTimers();};$('tv-session').onclick=toggleSession;
   $('tv-rest-undo').onclick=function(){state.done[key()]=Math.max(0,completed()-1);updateProgress();closeRest();focus('tv-complete');};

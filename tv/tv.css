@@ -74,3 +74,76 @@ h1,h2,p{margin:0}h1,h2{overflow-wrap:anywhere;font-style:normal}
 @media(max-width:600px){.tv-follow-orb{width:84px;height:84px}.tv-follow-orb::before{inset:6px}.tv-follow-orb strong{font-size:36px}.tv-follow-orb span{font-size:11px}.tv-follow-panel button{font-size:16px}}
 @media(max-width:600px){.tv-header-lesson-open{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start}.tv-header-lesson-open #tv-home-button{grid-column:1;grid-row:1;justify-self:start}.tv-header-lesson-open .tv-follow-orb{grid-column:2;grid-row:1;justify-self:end}.tv-header-lesson-open .tv-lesson-heading{grid-column:1/-1;grid-row:2;min-width:0}}
 @media(prefers-reduced-motion:reduce){.tv-breath-guide::before{animation:none}}
+
+/* Hallmark · Sony TV 16:9 training canvas · pre-emit critique: P5 H5 E4 S5 R5 V4
+ * WebView may expose a 960×540 CSS viewport on a 1920×1080 panel.
+ */
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-size:clamp(13px,2.1vh,23px)}
+.tv-shell{width:100%;height:100vh;min-height:0;max-width:none;padding:1.3vh 2vw;gap:1vh;overflow:hidden}
+.tv-header,.tv-header-lesson-open{height:14vh;max-height:150px;min-height:0;flex:none;display:flex;flex-wrap:nowrap;align-items:center;gap:1vw;padding-bottom:.7vh}
+.tv-header button{height:6.2vh;min-height:0;padding:.5vh 1.3vw;font-size:clamp(14px,2.1vh,23px)}
+.tv-lesson-heading{flex:1;min-height:0;min-width:0;gap:1vw}
+.tv-header-lesson-open .tv-lesson-heading{order:0;grid-column:auto;grid-row:auto;flex:1;flex-basis:0;align-items:center}
+.tv-header-lesson-open #tv-home-button{order:2;grid-column:auto;grid-row:auto}
+.tv-header-lesson-open .tv-follow-orb{order:3;grid-column:auto;grid-row:auto}
+#tv-position{font-size:clamp(13px,2.25vh,23px)}
+#tv-action-name{font-size:clamp(25px,4.5vh,50px);line-height:1.1;margin:0}
+#tv-dose{font-size:clamp(13px,2.35vh,26px);line-height:1.22}
+.tv-clock strong{font-size:clamp(26px,4.7vh,52px)}
+.tv-clock span{font-size:clamp(11px,1.8vh,20px)}
+.tv-follow-orb{width:10vh;height:10vh;min-width:54px;min-height:54px}
+.tv-follow-orb::before{inset:.8vh}
+.tv-follow-orb strong{font-size:clamp(25px,4.5vh,50px)}
+.tv-follow-orb span{font-size:clamp(9px,1.25vh,15px)}
+#tv-main,#tv-lesson{min-height:0;overflow:hidden}
+#tv-lesson{gap:1vh}
+.tv-routine{flex:none;min-height:5.8vh;gap:.7vw;flex-wrap:nowrap}
+.tv-routine-tab{height:5.8vh;min-height:0;padding:.45vh 1.3vw;font-size:clamp(14px,2.1vh,23px)}
+.tv-follow-panel{flex:none;min-height:0;height:6.4vh;padding:.45vh .6vw;gap:.8vw}
+.tv-follow-panel button{height:5.1vh;min-height:0;max-width:none;flex:0 1 auto;padding:.3vh 1.3vw;font-size:clamp(14px,2.05vh,22px)}
+.tv-stage{flex:1;min-height:0;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:1.1vw}
+.tv-demonstration{padding:.7vh;overflow:hidden}
+.tv-media{height:auto;flex:1 1 auto;min-height:0}
+.tv-media img.tv-low-resolution{height:100%;max-height:100%;max-width:100%}
+#tv-media-status{min-height:0;font-size:clamp(11px,1.5vh,17px)}
+.tv-media-caption{font-size:clamp(9px,1.25vh,15px);line-height:1.15}
+.tv-instruction{min-height:0;padding:1vh 1.1vw;gap:.5vh;border-width:1px;overflow:hidden}
+.tv-page-heading{padding-bottom:.45vh}
+.tv-page-heading h2{font-size:clamp(16px,2.45vh,28px)}
+#tv-guide{min-height:0;overflow-y:auto;padding:0 .25vw 0 0}
+#tv-steps{gap:.7vh}
+#tv-steps li{font-size:clamp(12px,1.95vh,22px);line-height:1.26;padding-left:clamp(23px,2.4vw,39px)}
+#tv-steps li::before{width:clamp(18px,2.1vh,27px);height:clamp(18px,2.1vh,27px);font-size:clamp(11px,1.55vh,18px)}
+.tv-cues{margin-top:.8vh;padding-top:.7vh;gap:.45vh;border-top-width:1px}
+.tv-cues p{font-size:clamp(11px,1.75vh,20px);line-height:1.28}
+.tv-guide-compact #tv-steps li{font-size:clamp(11px,1.7vh,19px);line-height:1.19}
+.tv-guide-compact .tv-cues p{font-size:clamp(10px,1.55vh,17px);line-height:1.2}
+.tv-guide-compact #tv-steps{gap:.35vh}
+.tv-controls{flex:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8vw}
+.tv-controls button{height:7vh;min-height:0;padding:.4vh .5vw;font-size:clamp(13px,2vh,22px)}
+.tv-routine-open .tv-routine{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:5.8vh minmax(0,1fr);align-items:start;gap:.8vh .8vw}
+.tv-routine-open .tv-routine-tab{justify-self:start}
+.tv-routine-open .tv-routine-content{grid-column:1/-1;min-height:0;height:100%;overflow:hidden;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8vw}
+.tv-routine-card{height:100%;min-height:0;overflow:hidden;padding:.7vh .65vw;gap:.5vh}
+.tv-routine-media,.tv-breath-guide{width:100%;height:22vh;min-height:0;max-height:230px;flex:none}
+.tv-routine-card strong{font-size:clamp(15px,2.15vh,24px);line-height:1.15}
+.tv-routine-card p{font-size:clamp(12px,1.8vh,20px);line-height:1.23;flex:0 1 auto}
+.tv-routine-card span{font-size:clamp(12px,1.9vh,21px)}
+.tv-routine-card small{font-size:clamp(9px,1.25vh,14px);line-height:1.12}
+.tv-routine-open .tv-controls{display:none}
+.tv-routine-open .tv-stage{display:none}
+button{position:relative;transition:transform 140ms ease-out,box-shadow 140ms ease-out,background-color 140ms ease-out,color 140ms ease-out}
+button:focus:not(:disabled),button:focus-visible:not(:disabled){z-index:2;outline:0;border-color:var(--color-focus);background:var(--color-focus);color:var(--color-accent-ink);transform:translateY(-.35vh) scale(1.045);box-shadow:0 0 0 2px var(--color-surface),0 .9vh 2vh var(--color-shadow-strong)}
+button:active:not(:disabled){transform:translateY(0) scale(.99);box-shadow:0 .25vh .7vh var(--color-shadow-strong)}
+#tv-guide:focus{outline:2px solid var(--color-focus);outline-offset:-2px}
+#tv-home{min-height:0;gap:3vh}
+.tv-home-intro h1{font-size:clamp(29px,5.5vh,65px)}
+.tv-home-intro p{font-size:clamp(14px,2.5vh,28px)}
+.tv-days{grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2vw}
+.tv-day{min-height:0;height:40vh;padding:2vh 1.4vw}
+.tv-day span{font-size:clamp(15px,2.5vh,28px)}
+.tv-day strong{font-size:clamp(30px,5.6vh,64px)}
+.tv-day .tv-day-meta{font-size:clamp(11px,1.8vh,20px)}
+.tv-home-bottom{font-size:clamp(13px,2.1vh,23px)}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
