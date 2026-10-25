@@ -5,7 +5,7 @@
   var $=function(id){return document.getElementById(id);};
   var escapeHTML=function(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
   var state={day:1,index:0,screen:'home',variants:{bridge:'dumbbell'},done:{},remaining:1800,deadline:null,restDeadline:null,restOpen:false,follow:null,routine:null};
-  var noticeTimeout,mediaToken=0,returnFocus='tv-rest';
+  var noticeTimeout,mediaToken=0,returnFocus='tv-rest',soundContext=null;
   var names=['周日','周一','周二','周三','周四','周五','周六'];
   function focus(id){var el=$(id);if(el&&!el.disabled&&!el.hidden){try{el.focus({preventScroll:true});}catch(e){el.focus();}markRemoteFocus(el);}}
   function markRemoteFocus(el){
@@ -13,6 +13,31 @@
     if(el&&el.tagName==='BUTTON'&&!el.disabled)el.classList.add('tv-remote-focused');
   }
   function notice(text){$('tv-notice').textContent=text;$('tv-notice').hidden=false;clearTimeout(noticeTimeout);noticeTimeout=setTimeout(function(){$('tv-notice').hidden=true;},6500);}
+  function unlockSounds(){
+    var AudioContext=window.AudioContext||window.webkitAudioContext;
+    if(!AudioContext)return;
+    try{
+      if(!soundContext)soundContext=new AudioContext();
+      if(soundContext.state==='suspended'){
+        var resumed=soundContext.resume();
+        if(resumed&&resumed.catch)resumed.catch(function(){});
+      }
+    }catch(e){soundContext=null;}
+  }
+  function tone(frequency,offset,duration,volume){
+    var ctx=soundContext;if(!ctx||ctx.state!=='running')return;
+    try{
+      var start=ctx.currentTime+offset,osc=ctx.createOscillator(),gain=ctx.createGain();
+      osc.type='sine';osc.frequency.setValueAtTime(frequency,start);
+      gain.gain.setValueAtTime(.001,start);
+      gain.gain.linearRampToValueAtTime(volume,start+.015);
+      gain.gain.exponentialRampToValueAtTime(.001,start+duration);
+      osc.connect(gain);gain.connect(ctx.destination);
+      osc.start(start);osc.stop(start+duration+.01);
+    }catch(e){/* Older WebViews may not provide every audio node. Counting continues. */}
+  }
+  function repSound(){tone(660,0,.09,.09);}
+  function actionSound(){tone(523,.14,.14,.13);tone(784,.31,.19,.13);}
   function current(){return PLAN[state.day].exercises[state.index];}
   function key(){return state.day+':'+current()[0]+':'+(current()[0]==='bridge'?'dumbbell':'body');}
   function exercise(){var id=current()[0],base=EX[id],variant=id==='bridge'?'dumbbell':'body';return Object.assign({},base,base.variants&&base.variants[variant]||{});}
@@ -123,18 +148,20 @@
   function stopFollow(){state.follow=null;renderFollow();}
   function pauseFollow(){var f=state.follow;if(f&&!f.paused){f.left=Math.max(0,f.deadline-Date.now());f.paused=true;renderFollow();}}
   function toggleFollow(){
+    unlockSounds();
     var f=state.follow;if(f){if(f.paused){f.deadline=Date.now()+f.left;f.paused=false;}else pauseFollow();renderFollow();return;}
     if(completed()>=current()[1]){notice('这个动作的组数已完成，请选择下一动作。');return;}
     state.follow={mode:'work',rep:0,side:1,paused:false};$('tv-routine-content').hidden=true;$('tv-lesson').classList.remove('tv-routine-open');resumeMedia();fitGuide();
     followStage('work',followSeconds());
   }
-  function finishFollowSet(){
+  function finishFollowSet(timed){
     var f=state.follow;state.done[key()]=Math.min(current()[1],completed()+1);updateProgress();
     var lastSet=completed()>=current()[1],lastAction=state.index>=PLAN[state.day].exercises.length-1;
+    if(timed&&lastSet)actionSound();
     if(lastSet&&lastAction){stopFollow();pauseSession();renderRoutine('cooldown');notice('正式训练结束，请按今日放松卡慢慢收尾。');return;}
     followStage('rest',lastSet?50:30);
   }
-  function nextFollowStage(){
+  function nextFollowStage(timed){
     var f=state.follow;if(!f)return;
     if(f.mode==='prepare'){followStage('work',followSeconds());return;}
     if(f.mode==='rest'){
@@ -142,13 +169,14 @@
       f.rep=0;f.side=1;followStage('work',followSeconds());return;
     }
     f.rep++;
+    if(timed)repSound();
     if(f.rep>=followTarget()){
       if(f.side<followSides()){f.side++;f.rep=0;followStage('prepare',5);return;}
-      else{finishFollowSet();return;}
+      else{finishFollowSet(timed);return;}
     }else{followStage('work',followSeconds());return;}
   }
-  function skipFollow(){nextFollowStage();}
-  function tickFollow(){var f=state.follow;if(!f||f.paused)return;if(Date.now()>=f.deadline)nextFollowStage();else renderFollow();}
+  function skipFollow(){nextFollowStage(false);}
+  function tickFollow(){var f=state.follow;if(!f||f.paused)return;if(Date.now()>=f.deadline)nextFollowStage(true);else renderFollow();}
   function selectDay(day){
     stopFollow();pauseMedia();if(state.day!==day){state.index=0;state.remaining=1800;}state.day=day;state.screen='lesson';state.deadline=null;state.restDeadline=null;
     $('tv-home').hidden=true;$('tv-lesson').hidden=false;$('tv-home-button').hidden=false;$('tv-brand').hidden=true;$('tv-header-lesson').hidden=false;document.querySelector('.tv-header').classList.add('tv-header-lesson-open');
