@@ -155,3 +155,22 @@ button:active:not(:disabled){transform:translateY(0) scale(.99);box-shadow:0 .25
 .tv-day .tv-day-meta{font-size:clamp(11px,1.8vh,20px)}
 .tv-home-bottom{font-size:clamp(13px,2.1vh,23px)}
 @media(prefers-reduced-motion:reduce){button{transition:none}}
+
+/* The 60-second timer must remain legible on Sony's half-resolution CSS viewport. */
+.tv-follow-orb{width:13vh;height:13vh;min-width:72px;min-height:72px;top:.7vh;right:1.5vw}
+.tv-follow-orb strong{font-size:clamp(31px,5.4vh,60px);margin:0;letter-spacing:-.04em;line-height:1}
+.tv-follow-orb span{font-size:clamp(9px,1.45vh,17px);line-height:1.08}
+.tv-follow-orb::before{inset:1vh}
+.tv-header-lesson-open #tv-home-button{margin-right:14vh}
+.tv-routine-open .tv-routine{grid-template-columns:repeat(3,max-content) minmax(0,1fr);column-gap:.7vw;justify-content:start}
+.tv-routine-open .tv-routine-content{grid-column:1/-1}
+.tv-controls{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* TV reading distance: keep steps legible while scrolling only the guide if needed. */
+#tv-steps li{font-size:clamp(14px,2.35vh,25px);line-height:1.29}
+.tv-cues p{font-size:clamp(12px,2.05vh,22px);line-height:1.27}
+.tv-guide-compact #tv-steps li{font-size:clamp(13px,2.15vh,23px);line-height:1.23}
+.tv-guide-compact .tv-cues p{font-size:clamp(12px,1.9vh,20px);line-height:1.22}
+.tv-follow-orb{justify-content:center}
+.tv-follow-orb strong{font-size:clamp(40px,7.4vh,78px);line-height:1.05}
+#tv-follow-status{font-size:clamp(12px,1.9vh,20px);font-weight:700;white-space:nowrap;color:var(--color-ink)}

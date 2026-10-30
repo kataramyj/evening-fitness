@@ -177,6 +177,76 @@
       "derived_first_frame": true,
       "bytes": 9076,
       "sha256": "bf80182721a25eb6803e426d5756bb21a6a744b07ed2b8bc98d42e0b1622c656"
+    },
+    {
+      "path": "assets/coaching/dumbbell-floor-fly.mp4",
+      "url": "https://fitwill.app/exercise/4149/dumbbell-floor-fly/video/",
+      "credit": "Fitwill",
+      "bytes": 2531037,
+      "sha256": "798df3d5fa17e86190e537d6173d4c13a516e7c3960dc54a09b63c6c93444387"
+    },
+    {
+      "path": "assets/coaching/dumbbell-lateral-raise.gif",
+      "url": "https://www.strengthlog.com/dumbbell-lateral-raise/",
+      "credit": "StrengthLog",
+      "bytes": 1949964,
+      "sha256": "f105498afc50c693e190fc3e541f1ea889c5afd4371ebf8d88cd854998bbf4f5"
+    },
+    {
+      "path": "assets/coaching/reverse-crunch.mp4",
+      "url": "https://fitwill.app/exercise/0872/reverse-crunch/",
+      "credit": "Fitwill",
+      "bytes": 2719682,
+      "sha256": "05f410633a617d201112104c36ac01fa6a803bde50f4564c8335d05ac76f0c36",
+      "derived_from_pdf": false
+    },
+    {
+      "path": "assets/coaching/side-lying-double-leg-lift-reference.png",
+      "url": "https://www.fittec.us/Education/ewExternalFiles/Side%20Lying%20Double%20Leg%20Lift.pdf",
+      "credit": "FITTEC",
+      "bytes": 56458,
+      "sha256": "7b8e8e5009a1ce453843927d28a182c98ffc22a0b63187298009c1fd508040bc",
+      "derived_from_pdf": true
+    },
+    {
+      "path": "assets/coaching/side-lying-double-leg-lift.mp4",
+      "url": "https://fitwill.app/exercise/9334/side-lying-legs-lift/",
+      "credit": "Fitwill",
+      "bytes": 5109235,
+      "sha256": "996e12fea20f55facb3063f547a0ad4d105bec7ca2ca91fd0f4c0016c960d188",
+      "retrieved_on": "2026-10-30"
+    },
+    {
+      "path": "assets/coaching/kneeling-straight-leg-kickback.mp4",
+      "url": "https://fitwill.app/exercise/1477/kneeling-straight-leg-kickback/",
+      "credit": "Fitwill",
+      "bytes": 3231281,
+      "sha256": "14e0955e7ef0327d3ed997e90a5dcbce1862a3f6893d8b6c0086ef3a5a9a1e2d",
+      "retrieved_on": "2026-10-30"
+    },
+    {
+      "path": "assets/coaching/kneeling-bent-leg-side-kick.mp4",
+      "url": "https://fitwill.app/exercise/1475/kneeling-bent-leg-side-kick/",
+      "credit": "Fitwill",
+      "bytes": 2393410,
+      "sha256": "5b8726266e9af8ec5417645ffce5e553286d3f4e8116d02ee4d04fe4aba77272",
+      "retrieved_on": "2026-10-30"
+    },
+    {
+      "path": "assets/coaching/hip-clam-shell.mp4",
+      "url": "https://fitwill.app/exercise/4870/hip-clam-shell/",
+      "credit": "Fitwill",
+      "bytes": 1906983,
+      "sha256": "08cc694714a2bf349d459cbfc80bca1f9ee49924d8b847f7da72b306a782731f",
+      "retrieved_on": "2026-10-30"
+    },
+    {
+      "path": "assets/coaching/alternate-heel-touches.mp4",
+      "url": "https://fitwill.app/exercise/0006/alternate-heel-touches/",
+      "media_url": "https://fitwill.app/videos/0006/alternate-heel-touches.mp4",
+      "credit": "Fitwill",
+      "bytes": 2419832,
+      "sha256": "d028cea116a6aa217a7b8a2421e04fb16040e81240d2804b21ec5014a082cd3f"
     }
   ]
 }

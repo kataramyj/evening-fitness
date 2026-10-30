@@ -88,5 +88,35 @@
     "sha256": "803bad1c46a93ca8804fb19f3bfbb494f5c755941345793a6caa2e97ec1b01a0",
     "attribution": "© Gym visual — https://gymvisual.com/",
     "resolution": "180×180"
+  },
+  {
+    "id": "3905",
+    "title": "手臂绕圈",
+    "file": "assets/warmup/arm-circles.mp4",
+    "source": "https://fitwill.app/exercise/3905/arm-circles/",
+    "media_url": "https://fitwill.app/videos/3905/arm-circles.mp4",
+    "bytes": 1950542,
+    "sha256": "2b91754f2c9caa7edc1680d0d82ebb4978a9443e9aad72a0a0e45f6dc05bc340",
+    "attribution": "Fitwill"
+  },
+  {
+    "id": "2116",
+    "title": "仰卧屈膝左右摆",
+    "file": "assets/warmup/lying-knee-roll-over-stretch.mp4",
+    "source": "https://fitwill.app/exercise/2116/lying-knee-roll-over-stretch/",
+    "media_url": "https://fitwill.app/videos/2116/lying-knee-roll-over-stretch.mp4",
+    "bytes": 5256399,
+    "sha256": "6c55574f50f3279e728237e402b993b65bd4d41142ccce990b6172a5ab651c06",
+    "attribution": "Fitwill"
+  },
+  {
+    "id": "7435",
+    "title": "站姿交替轻后伸腿",
+    "file": "assets/warmup/standing-alternate-glute-kickback.mp4",
+    "source": "https://fitwill.app/exercise/7435/standing-alternate-glute-kickback/",
+    "media_url": "https://fitwill.app/videos/7435/standing-alternate-glute-kickback.mp4",
+    "bytes": 5082460,
+    "sha256": "bc7156f32925849695126abbe3a19705497aa5f8bddda5374543bb11afb00d76",
+    "attribution": "Fitwill"
   }
 ]
