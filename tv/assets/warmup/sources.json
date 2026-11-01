@@ -10,16 +10,6 @@
     "resolution": "180×180"
   },
   {
-    "id": "1364",
-    "title": "站姿骨盆活动",
-    "file": "assets/warmup/standing-pelvic-tilt.gif",
-    "source": "https://github.com/hasaneyldrm/exercises-dataset/blob/main/videos/1364-cuKYxhu.gif",
-    "bytes": 72271,
-    "sha256": "936c82509afb29be7d8bf96dbaf5772b0358403ee1c143e4901439819b05a258",
-    "attribution": "© Gym visual — https://gymvisual.com/",
-    "resolution": "180×180"
-  },
-  {
     "id": "1368",
     "title": "脚踝绕圈",
     "file": "assets/warmup/ankle-circles.gif",
