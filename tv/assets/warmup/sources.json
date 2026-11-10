@@ -80,33 +80,26 @@
     "resolution": "180×180"
   },
   {
-    "id": "3905",
-    "title": "手臂绕圈",
-    "file": "assets/warmup/arm-circles.mp4",
-    "source": "https://fitwill.app/exercise/3905/arm-circles/",
-    "media_url": "https://fitwill.app/videos/3905/arm-circles.mp4",
-    "bytes": 1950542,
-    "sha256": "2b91754f2c9caa7edc1680d0d82ebb4978a9443e9aad72a0a0e45f6dc05bc340",
-    "attribution": "Fitwill"
+    "title": "physitrack-knee-roll",
+    "file": "assets/warmup/physitrack-knee-roll.mp4",
+    "source": "https://us.physitrack.com/home-exercise-video/supine-spinal-rotation",
+    "media_url": "https://media.physitrack.com/exercises/8069a490-8c64-48d1-9014-01fca873343e/en/video_1280x720.mp4",
+    "bytes": 2333292,
+    "sha256": "0f06e3bab33482073f8d0ee66787cf51b153fc36ac6f4864c83d9dff683f756b",
+    "attribution": "Physitrack"
   },
   {
-    "id": "2116",
-    "title": "仰卧屈膝左右摆",
-    "file": "assets/warmup/lying-knee-roll-over-stretch.mp4",
-    "source": "https://fitwill.app/exercise/2116/lying-knee-roll-over-stretch/",
-    "media_url": "https://fitwill.app/videos/2116/lying-knee-roll-over-stretch.mp4",
-    "bytes": 5256399,
-    "sha256": "6c55574f50f3279e728237e402b993b65bd4d41142ccce990b6172a5ab651c06",
-    "attribution": "Fitwill"
+    "file": "assets/warmup/arm-circles-lyfta.mp4",
+    "source": "https://lyftaweb.s3.us-east-2.amazonaws.com/GymvisualMP4/39051201.mp4",
+    "bytes": 899413,
+    "sha256": "56b97ea3a8bbd0093c9d08f3238274b91d742ba6f90d9552651cdd415ea3c24a",
+    "attribution": "Lyfta / Gymvisual"
   },
   {
-    "id": "7435",
-    "title": "站姿交替轻后伸腿",
-    "file": "assets/warmup/standing-alternate-glute-kickback.mp4",
-    "source": "https://fitwill.app/exercise/7435/standing-alternate-glute-kickback/",
-    "media_url": "https://fitwill.app/videos/7435/standing-alternate-glute-kickback.mp4",
-    "bytes": 5082460,
-    "sha256": "bc7156f32925849695126abbe3a19705497aa5f8bddda5374543bb11afb00d76",
-    "attribution": "Fitwill"
+    "file": "assets/warmup/standing-kickback-lyfta.mp4",
+    "source": "https://lyftaweb.s3.us-east-2.amazonaws.com/GymvisualMP4/74351201.mp4",
+    "bytes": 1810382,
+    "sha256": "13d4586d8cd3f344d1cc8440562edbf36cc7d9b33ac131757fe76ddae9ccdf0b",
+    "attribution": "Lyfta / Gymvisual"
   }
 ]

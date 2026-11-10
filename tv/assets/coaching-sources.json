@@ -91,13 +91,6 @@
       "sha256": "a947de07963de39eecfdf2eeace62e87330662bd92e291877bad1229c7801887"
     },
     {
-      "path": "assets/coaching/dumbbell-floor-fly.mp4",
-      "url": "https://fitwill.app/exercise/4149/dumbbell-floor-fly/video/",
-      "credit": "Fitwill",
-      "bytes": 2531037,
-      "sha256": "798df3d5fa17e86190e537d6173d4c13a516e7c3960dc54a09b63c6c93444387"
-    },
-    {
       "path": "assets/coaching/dumbbell-lateral-raise.gif",
       "url": "https://www.strengthlog.com/dumbbell-lateral-raise/",
       "credit": "StrengthLog",
@@ -105,52 +98,54 @@
       "sha256": "f105498afc50c693e190fc3e541f1ea889c5afd4371ebf8d88cd854998bbf4f5"
     },
     {
-      "path": "assets/coaching/reverse-crunch.mp4",
-      "url": "https://fitwill.app/exercise/0872/reverse-crunch/",
-      "credit": "Fitwill",
-      "bytes": 2719682,
-      "sha256": "05f410633a617d201112104c36ac01fa6a803bde50f4564c8335d05ac76f0c36",
-      "derived_from_pdf": false
+      "path": "assets/coaching/kickback-lyfta.mp4",
+      "url": "https://lyftaweb.s3.us-east-2.amazonaws.com/GymvisualMP4/14771201.mp4",
+      "credit": "Lyfta / Gymvisual",
+      "bytes": 2406817,
+      "sha256": "389959c0ec23717176f135e9ba22ccbce693943835eb2be8aeeadaffa97168c1"
     },
     {
-      "path": "assets/coaching/side-lying-double-leg-lift.mp4",
-      "url": "https://fitwill.app/exercise/9334/side-lying-legs-lift/",
-      "credit": "Fitwill",
-      "bytes": 5109235,
-      "sha256": "996e12fea20f55facb3063f547a0ad4d105bec7ca2ca91fd0f4c0016c960d188",
-      "retrieved_on": "2026-10-30"
+      "path": "assets/coaching/fire-hydrant-lyfta.mp4",
+      "url": "https://lyftaweb.s3.us-east-2.amazonaws.com/GymvisualMP4/14751201.mp4",
+      "credit": "Lyfta / Gymvisual",
+      "bytes": 1918494,
+      "sha256": "154d3e94cd10260963b92a7db06771f5fd28f898d8d2900fa233122a99861d04"
     },
     {
-      "path": "assets/coaching/kneeling-straight-leg-kickback.mp4",
-      "url": "https://fitwill.app/exercise/1477/kneeling-straight-leg-kickback/",
-      "credit": "Fitwill",
-      "bytes": 3231281,
-      "sha256": "14e0955e7ef0327d3ed997e90a5dcbce1862a3f6893d8b6c0086ef3a5a9a1e2d",
-      "retrieved_on": "2026-10-30"
+      "path": "assets/coaching/clamshell-lyfta.mp4",
+      "url": "https://lyftaweb.s3.us-east-2.amazonaws.com/GymvisualMP4/48701201.mp4",
+      "credit": "Lyfta / Gymvisual",
+      "bytes": 698254,
+      "sha256": "295c6c7a6b4afd0ae101ec3855b246ddf9d609eacf845939be8f5d8bec6e31ca"
     },
     {
-      "path": "assets/coaching/kneeling-bent-leg-side-kick.mp4",
-      "url": "https://fitwill.app/exercise/1475/kneeling-bent-leg-side-kick/",
-      "credit": "Fitwill",
-      "bytes": 2393410,
-      "sha256": "5b8726266e9af8ec5417645ffce5e553286d3f4e8116d02ee4d04fe4aba77272",
-      "retrieved_on": "2026-10-30"
+      "path": "assets/coaching/floor-fly-lyfta.mp4",
+      "url": "https://lyftaweb.s3.us-east-2.amazonaws.com/GymvisualMP4/41491201.mp4",
+      "credit": "Lyfta / Gymvisual",
+      "bytes": 2298647,
+      "sha256": "e092adb5374619910ad6c23fdeb037f704535d9d216013a47c6cc290b9e23365"
     },
     {
-      "path": "assets/coaching/hip-clam-shell.mp4",
-      "url": "https://fitwill.app/exercise/4870/hip-clam-shell/",
-      "credit": "Fitwill",
-      "bytes": 1906983,
-      "sha256": "08cc694714a2bf349d459cbfc80bca1f9ee49924d8b847f7da72b306a782731f",
-      "retrieved_on": "2026-10-30"
+      "path": "assets/coaching/crunch-floor-lyfta.mp4",
+      "url": "https://lyftaweb.s3.us-east-2.amazonaws.com/GymvisualMP4/02751201.mp4",
+      "source": "https://www.lyfta.app/exercise/crunch-floor-6gd",
+      "credit": "Lyfta / Gymvisual",
+      "bytes": 1215558,
+      "sha256": "73191313d401dceb47668bb6a27ea78ec61f766edf012c5268499b388e1c08c4"
     },
     {
-      "path": "assets/coaching/alternate-heel-touches.mp4",
-      "url": "https://fitwill.app/exercise/0006/alternate-heel-touches/",
-      "media_url": "https://fitwill.app/videos/0006/alternate-heel-touches.mp4",
-      "credit": "Fitwill",
-      "bytes": 2419832,
-      "sha256": "d028cea116a6aa217a7b8a2421e04fb16040e81240d2804b21ec5014a082cd3f"
+      "path": "assets/coaching/knee-fall-out-physitrack.mp4",
+      "url": "https://us.physitrack.com/home-exercise-video/deep-core-in-bent-knee-fall-out",
+      "credit": "Physitrack",
+      "bytes": 2950559,
+      "sha256": "4d1b813df051b5a63355865689737b7d1c5cd7ae2a88111439e9f8238a0d2ee1"
+    },
+    {
+      "path": "assets/coaching/russian-twist-runnersworld.mp4",
+      "url": "https://www.runnersworld.co.za/training/the-10-strength-training-exercises-every-runner-needs/",
+      "credit": "Runner’s World",
+      "bytes": 238071,
+      "sha256": "bb96d2cdae7cbf351e6ced478064127614a60c628412e8f8580148e0037cbf9d"
     }
   ]
 }

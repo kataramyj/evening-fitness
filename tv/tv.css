@@ -174,3 +174,45 @@ button:active:not(:disabled){transform:translateY(0) scale(.99);box-shadow:0 .25
 .tv-follow-orb{justify-content:center}
 .tv-follow-orb strong{font-size:clamp(40px,7.4vh,78px);line-height:1.05}
 #tv-follow-status{font-size:clamp(12px,1.9vh,20px);font-weight:700;white-space:nowrap;color:var(--color-ink)}
+
+/* Keep the title, return button and follow display in separate TV header areas. */
+.tv-header-lesson-open{height:17vh;max-height:none;display:grid;grid-template-columns:minmax(0,1fr) max-content;column-gap:1.5vw;padding-right:calc(16vh + 2.5vw);align-items:center}
+.tv-header-lesson-open .tv-lesson-heading{display:grid;grid-template-columns:minmax(0,1fr) max-content;column-gap:1.5vw;align-items:center;min-width:0}
+.tv-lesson-heading>div:first-child{min-width:0}
+#tv-position{font-size:clamp(11px,1.9vh,20px);line-height:1.12}
+#tv-action-name{font-size:clamp(22px,4vh,42px);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tv-dose{font-size:clamp(11px,1.9vh,20px);line-height:1.16}
+.tv-clock strong{font-size:clamp(23px,4vh,44px)}
+.tv-clock span{font-size:clamp(10px,1.45vh,16px);white-space:nowrap}
+.tv-header-lesson-open #tv-home-button{margin:0;position:relative;z-index:3}
+.tv-follow-hud{position:fixed;top:.6vh;right:1.5vw;width:13vh;display:flex;flex-direction:column;align-items:center;z-index:5;line-height:1}
+.tv-follow-hud .tv-follow-orb{position:relative;top:auto;right:auto;width:12vh;height:12vh;min-width:65px;min-height:65px}
+.tv-follow-hud .tv-follow-orb strong{font-size:clamp(35px,6.3vh,70px)}
+.tv-follow-group{display:block;margin-top:.3vh;font:700 clamp(17px,3.15vh,34px) var(--font-mono);font-variant-numeric:tabular-nums;color:var(--color-accent);white-space:nowrap}
+.tv-rest-next{display:flex;align-items:center;justify-content:center;gap:1.5vw;margin:1vh auto;padding:.6vh 1vw;background:var(--color-paper-2);max-width:100%}
+.tv-rest-next>div{height:16vh;width:22vh;flex:none;background:var(--color-ink)}
+.tv-rest-next video,.tv-rest-next img{display:block;width:100%;height:100%;object-fit:contain}
+.tv-rest-next p{font-size:clamp(16px,2.8vh,30px);font-weight:700;text-align:left}
+.tv-rest-content{max-height:94vh;overflow:auto}
+
+.tv-motto{margin-top:1.4vh!important;color:var(--color-accent)!important;font-size:clamp(20px,3.8vh,42px)!important;font-weight:700;line-height:1.25;max-width:90vw}
+
+/* Home reminder sits beside the heading as a single prominent TV panel. */
+.tv-home-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;gap:2vw;min-height:17vh}
+.tv-home-heading{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.tv-motto-panel{display:flex;flex-direction:column;justify-content:center;gap:.7vh;background:#713f2a;color:#fff8e9;border-radius:var(--radius-sm);padding:1.6vh 2vw;min-width:0}
+.tv-motto-panel>span{font-size:clamp(13px,1.9vh,22px);font-weight:700;letter-spacing:.12em;opacity:.8}
+.tv-home-intro .tv-motto{margin:0!important;color:#fff8e9!important;font:600 clamp(24px,4.2vh,47px)/1.22 var(--font-display)!important;max-width:none;letter-spacing:.025em}
+
+/* Quiet reminder aligned to the header rule. */
+#tv-home{justify-content:flex-start;padding-top:.6vh}
+.tv-home-intro{min-height:16vh;align-items:start}
+.tv-home-heading{justify-content:flex-start;padding-top:1.6vh}
+.tv-motto-panel{display:flex;justify-content:flex-start;align-items:flex-end;background:none;color:#713f2a;border-radius:0;padding:.4vh 0 0;min-height:0;text-align:right}
+.tv-home-intro .tv-motto{color:#713f2a!important;text-align:right;font-size:clamp(24px,4.2vh,47px)!important;line-height:1.25}
+
+/* Use measured guide space; prevent Android WebView font boosting. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#tv-guide,#tv-guide *{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#tv-steps li,.tv-guide-compact #tv-steps li{font-size:var(--guide-step-size,18px);line-height:1.23}
+.tv-cues p,.tv-guide-compact .tv-cues p{font-size:var(--guide-cue-size,15px);line-height:1.23}
